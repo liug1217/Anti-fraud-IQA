@@ -14,7 +14,6 @@ html, body{
     padding: 0;
     width: 100%;
     height: 100%;
-
     background: #1100F9;
 }
 
@@ -50,7 +49,6 @@ html, body{
     position: absolute;
     left: 20px;
     top: 60px;
-
     font-size: 30px;
     font-weight: 1000;
     color: #fff;
@@ -61,7 +59,6 @@ html, body{
     position: absolute;
     left: 20px;
     top: 106px;
-
     font-size: 15px;
     color: #8C8C8C;
 }
@@ -71,12 +68,9 @@ html, body{
     position: absolute;
     background: rgba(255,255,255,0.1);
     border-radius: 40px;
-
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-
     border: 1px solid rgba(255,255,255,0.18);
-
     box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
 }
 
@@ -84,17 +78,15 @@ html, body{
 .rect2{ left: 20px; right: 20px; top: 143px; height: 200px; }
 .rect3{ left: 20px; top: 363px; width: calc(50% - 30px); height: 170px; }
 .rect4{ right: 20px; top: 363px; width: calc(50% - 30px); height: 170px; }
-.rect5{ left: 20px; top: 553px; width: calc(50% - 30px); height: 170px; cursor:pointer; }
+.rect5{ left: 20px; top: 553px; width: calc(50% - 30px); height: 170px; }
 .rect6{ right: 20px; top: 553px; width: calc(50% - 30px); height: 170px; }
 
 /* ===== Bottom Nav ===== */
 .rect1{
     position: absolute;
-
     left: 20px;
     right: 20px;
     bottom: 20px;
-
     height: 90px;
 
     background: rgba(255,255,255,0.1);
@@ -112,29 +104,22 @@ html, body{
     box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 
-/* ===== Tabs ===== */
 .tab{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     color: white;
 }
 
 .tab-icon{ font-size: 18px; }
-
-.tab-text{
-    font-size: 12px;
-    margin-top: 4px;
-}
+.tab-text{ font-size: 12px; margin-top: 4px; }
 
 /* ===== Page（新 Frame）===== */
 .page{
-    position:absolute;
-    inset:0;
-
-    display:none;
+    position: absolute;
+    inset: 0;
+    display: none;
 
     background: linear-gradient(
         360deg,
@@ -143,30 +128,48 @@ html, body{
         #1100FF 100%
     );
 
-    z-index:999;
+    z-index: 999;
 }
 
-/* ===== Page UI ===== */
 .page-header{
-    position:absolute;
-    top:60px;
-    left:20px;
+    position: absolute;
+    top: 60px;
+    left: 20px;
 
-    color:#fff;
-    font-size:18px;
-    font-weight:700;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
 
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .page-title{
-    position:absolute;
-    top:120px;
-    left:20px;
+    position: absolute;
+    top: 120px;
+    left: 20px;
 
-    color:#fff;
-    font-size:30px;
-    font-weight:1000;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 1000;
+}
+
+/* ===== Card text ===== */
+.icon{
+    position: absolute;
+    color: #fff;
+    font-weight: 1000;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+}
+
+.text-main{
+    position: absolute;
+    color: #fff;
+    font-weight: 700;
+}
+
+.text-sub{
+    position: absolute;
+    color: #8C8C8C;
 }
 
 </style>
@@ -174,13 +177,7 @@ html, body{
 
 <body>
 
-<div class="app">
-
-    <!-- ===== 新頁面（網址檢查）===== -->
-    <div id="urlPage" class="page">
-        <div class="page-header" onclick="closePage()">← 返回</div>
-        <div class="page-title">網址檢查</div>
-    </div>
+<div class="app" id="homePage">
 
     <div class="content">
 
@@ -194,53 +191,58 @@ html, body{
         </div>
 
         <div class="rect3 glass">
-            <div class="icon">💬</div>
-            <div class="text-main">訊息分析</div>
-            <div class="text-sub">檢查簡訊與聊天內容</div>
+            <div class="icon" style="left:20px; top:20px; font-size:50px;">💬</div>
+            <div class="text-main" style="left:20px; top:115px; font-size:15px;">訊息分析</div>
+            <div class="text-sub" style="left:20px; top:140px; font-size:10px;">檢查簡訊與聊天內容</div>
         </div>
 
         <div class="rect4 glass">
-            <div class="icon">📞</div>
-            <div class="text-main">電話查詢</div>
-            <div class="text-sub">識別可疑來電</div>
+            <div class="icon" style="left:20px; top:20px; font-size:50px;">📞</div>
+            <div class="text-main" style="left:20px; top:115px; font-size:15px;">電話查詢</div>
+            <div class="text-sub" style="left:20px; top:140px; font-size:10px;">識別可疑來電</div>
         </div>
 
-        <!-- ===== 點擊這裡 ===== -->
+        <!-- 🔥 點擊這個 -->
         <div class="rect5 glass" onclick="openUrlPage()">
-            <div class="icon">🌐</div>
-            <div class="text-main">網址檢查</div>
-            <div class="text-sub">驗證網站安全性</div>
+            <div class="icon" style="left:20px; top:20px; font-size:50px;">🌐</div>
+            <div class="text-main" style="left:20px; top:115px; font-size:15px;">網址檢查</div>
+            <div class="text-sub" style="left:20px; top:140px; font-size:10px;">驗證網站安全性</div>
         </div>
 
         <div class="rect6 glass">
-            <div class="icon">🚨</div>
-            <div class="text-main">最新案例</div>
-            <div class="text-sub">掌握詐騙趨勢</div>
+            <div class="icon" style="left:20px; top:20px; font-size:50px;">🚨</div>
+            <div class="text-main" style="left:20px; top:115px; font-size:15px;">最新案例</div>
+            <div class="text-sub" style="left:20px; top:140px; font-size:10px;">掌握詐騙趨勢</div>
         </div>
 
     </div>
 
     <div class="rect1">
-
-        <div class="tab">🏠<div class="tab-text">首頁</div></div>
-        <div class="tab">🤖<div class="tab-text">AI</div></div>
-        <div class="tab">📷<div class="tab-text">掃描</div></div>
-        <div class="tab">👤<div class="tab-text">我的</div></div>
-
+        <div class="tab"><div class="tab-icon">🏠</div><div class="tab-text">首頁</div></div>
+        <div class="tab"><div class="tab-icon">🤖</div><div class="tab-text">AI</div></div>
+        <div class="tab"><div class="tab-icon">📷</div><div class="tab-text">掃描</div></div>
+        <div class="tab"><div class="tab-icon">👤</div><div class="tab-text">我的</div></div>
     </div>
 
 </div>
 
-<script>
+<!-- ===== 新 Frame：網址檢查頁 ===== -->
+<div class="page" id="urlPage">
 
+    <div class="page-header" onclick="closeUrlPage()">← 返回</div>
+
+    <div class="page-title">網址檢查</div>
+
+</div>
+
+<script>
 function openUrlPage(){
     document.getElementById("urlPage").style.display = "block";
 }
 
-function closePage(){
+function closeUrlPage(){
     document.getElementById("urlPage").style.display = "none";
 }
-
 </script>
 
 </body>
