@@ -3,170 +3,172 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>反詐騙IQA</title>
 
 <style>
-html,body{
-    margin:0;
-    padding:0;
-    width:100%;
-    height:100%;
-    background:#1100F9;
+
+/* ===== 最底層背景 ===== */
+html, body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+
+    background: #1100F9;
 }
 
-*{
-    font-family:"SF Pro",-apple-system,BlinkMacSystemFont,sans-serif;
-    box-sizing:border-box;
-}
-
+/* ===== App（原本漸層保留）===== */
 .app{
-    width:100%;
-    height:100vh;
-    position:relative;
-    background:linear-gradient(360deg,#0091FF 0%,#000000 50%,#1100FF 100%);
-    overflow:hidden;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+
+    background: linear-gradient(
+        360deg,
+        #0091FF 0%,
+        #000000 50%,
+        #1100FF 100%
+    );
+
+    overflow: hidden;
 }
 
+/* ===== 字體 ===== */
+*{
+    font-family: "SF Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ===== 上移容器 ===== */
 .content{
-    position:relative;
-    transform:translateY(-60px);
+    position: relative;
+    transform: translateY(-60px);
 }
 
+/* ===== Title ===== */
 .title{
-    position:absolute;
-    left:20px;
-    top:60px;
-    font-size:30px;
-    font-weight:1000;
-    color:#fff;
-    text-shadow:0 4px 4px rgba(0,0,0,.25);
+    position: absolute;
+    left: 20px;
+    top: 60px;
+
+    font-size: 30px;
+    font-weight: 1000;
+    color: #fff;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 
 .subtitle{
-    position:absolute;
-    left:20px;
-    top:106px;
-    font-size:15px;
-    color:#8C8C8C;
+    position: absolute;
+    left: 20px;
+    top: 106px;
+
+    font-size: 15px;
+    color: #8C8C8C;
 }
 
-/* ===== 卡片 ===== */
+/* ===== glass ===== */
 .glass{
-    position:absolute;
-    background:rgba(255,255,255,.1);
-    border:1px solid rgba(255,255,255,.18);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    box-shadow:0 4px 12px rgba(0,0,0,.25);
-    border-radius:40px;
+    position: absolute;
+    background: rgba(255,255,255,0.1);
+    border-radius: 40px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
 }
 
-.rect2{ left:20px; right:20px; top:143px; height:200px; }
-.rect3{ left:20px; top:363px; width:calc(50% - 30px); height:170px; }
-.rect4{ right:20px; top:363px; width:calc(50% - 30px); height:170px; }
-.rect5{ left:20px; top:553px; width:calc(50% - 30px); height:170px; cursor:pointer; }
-.rect6{ right:20px; top:553px; width:calc(50% - 30px); height:170px; }
+/* ===== Rectangles ===== */
+.rect2{ left: 20px; right: 20px; top: 143px; height: 200px; }
+.rect3{ left: 20px; top: 363px; width: calc(50% - 30px); height: 170px; }
+.rect4{ right: 20px; top: 363px; width: calc(50% - 30px); height: 170px; }
+.rect5{ left: 20px; top: 553px; width: calc(50% - 30px); height: 170px; cursor:pointer; }
+.rect6{ right: 20px; top: 553px; width: calc(50% - 30px); height: 170px; }
 
-/* ===== 底部 ===== */
+/* ===== Bottom Nav ===== */
 .rect1{
-    position:absolute;
-    left:20px;
-    right:20px;
-    bottom:20px;
-    height:90px;
-    background:rgba(255,255,255,.1);
-    border:1px solid rgba(255,255,255,.18);
-    border-radius:50px;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+
+    height: 90px;
+
+    background: rgba(255,255,255,0.1);
+    border-radius: 50px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 
+/* ===== Tabs ===== */
 .tab{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    color:#fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
 }
 
-.tab-icon{font-size:18px;}
-.tab-text{font-size:12px;margin-top:4px;}
+.tab-icon{ font-size: 18px; }
 
-/* ===== URL頁（已刪除所有 rect7/8/9）===== */
+.tab-text{
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* ===== Page（新 Frame）===== */
 .page{
     position:absolute;
     inset:0;
+
     display:none;
+
+    background: linear-gradient(
+        360deg,
+        #0091FF 0%,
+        #000000 50%,
+        #1100FF 100%
+    );
+
     z-index:999;
-    background:linear-gradient(360deg,#0091FF 0%,#000000 50%,#1100FF 100%);
 }
 
-.url-icon{
+/* ===== Page UI ===== */
+.page-header{
     position:absolute;
-    left:40px;
-    top:298px;
-    font-size:50px;
+    top:60px;
+    left:20px;
+
     color:#fff;
-}
-
-.url-title{
-    position:absolute;
-    left:110px;
-    top:305px;
-    font-size:15px;
+    font-size:18px;
     font-weight:700;
-    color:#fff;
-}
 
-.url-subtitle{
-    position:absolute;
-    left:110px;
-    top:328px;
-    font-size:10px;
-    color:#8C8C8C;
-}
-
-.input-label{
-    position:absolute;
-    left:60px;
-    top:416px;
-    font-size:15px;
-    color:#fff;
-}
-
-.input-box{
-    position:absolute;
-    left:40px;
-    right:40px;
-    top:450px;
-    height:50px;
-    background:rgba(217,217,217,0.1);
-    border-radius:25px;
-}
-
-.confirm-btn{
-    position:absolute;
-    left:340px;
-    top:416px;
-    font-size:15px;
-    color:#fff;
     cursor:pointer;
 }
 
-.check-icon{
+.page-title{
     position:absolute;
-    left:40px;
-    top:470px;
+    top:120px;
+    left:20px;
+
+    color:#fff;
     font-size:30px;
+    font-weight:1000;
 }
 
-.check-text{
-    position:absolute;
-    left:90px;
-    top:477px;
-    font-size:15px;
-    color:#fff;
-}
 </style>
 </head>
 
@@ -174,51 +176,71 @@ html,body{
 
 <div class="app">
 
-<div class="content">
+    <!-- ===== 新頁面（網址檢查）===== -->
+    <div id="urlPage" class="page">
+        <div class="page-header" onclick="closePage()">← 返回</div>
+        <div class="page-title">網址檢查</div>
+    </div>
 
-    <div class="title">反詐騙IQA</div>
-    <div class="subtitle">您的AI反詐騙智能小助手</div>
+    <div class="content">
 
-    <div class="rect2 glass"></div>
-    <div class="rect3 glass"></div>
-    <div class="rect4 glass"></div>
-    <div class="rect5 glass" onclick="openUrlPage()"></div>
-    <div class="rect6 glass"></div>
+        <div class="title">反詐騙IQA</div>
+        <div class="subtitle">您的AI反詐騙智能小助手</div>
 
-</div>
+        <div class="rect2 glass">
+            <div class="icon" style="left:20px; top:20px; font-size:80px;">🛡️</div>
+            <div class="text-main" style="left:20px; top:115px; font-size:20px;">安全分數 98</div>
+            <div class="text-sub" style="left:20px; top:140px; font-size:15px;">今天尚未發現高風險詐騙活動</div>
+        </div>
 
-<div class="rect1">
-    <div class="tab">🏠<div class="tab-text">首頁</div></div>
-    <div class="tab">🤖<div class="tab-text">AI</div></div>
-    <div class="tab">📷<div class="tab-text">掃描</div></div>
-    <div class="tab">👤<div class="tab-text">我的</div></div>
-</div>
+        <div class="rect3 glass">
+            <div class="icon">💬</div>
+            <div class="text-main">訊息分析</div>
+            <div class="text-sub">檢查簡訊與聊天內容</div>
+        </div>
 
-<!-- URL PAGE（乾淨版） -->
-<div id="urlPage" class="page">
+        <div class="rect4 glass">
+            <div class="icon">📞</div>
+            <div class="text-main">電話查詢</div>
+            <div class="text-sub">識別可疑來電</div>
+        </div>
 
-    <div class="url-icon">🌐</div>
-    <div class="url-title">網址檢查</div>
-    <div class="url-subtitle">驗證網站安全性</div>
+        <!-- ===== 點擊這裡 ===== -->
+        <div class="rect5 glass" onclick="openUrlPage()">
+            <div class="icon">🌐</div>
+            <div class="text-main">網址檢查</div>
+            <div class="text-sub">驗證網站安全性</div>
+        </div>
 
-    <div class="input-label">輸入網址</div>
-    <div class="input-box"></div>
-    <div class="confirm-btn">確認</div>
+        <div class="rect6 glass">
+            <div class="icon">🚨</div>
+            <div class="text-main">最新案例</div>
+            <div class="text-sub">掌握詐騙趨勢</div>
+        </div>
 
-    <div class="check-icon">✅</div>
-    <div class="check-text">本網站已確認為安全網站</div>
+    </div>
 
-</div>
+    <div class="rect1">
+
+        <div class="tab">🏠<div class="tab-text">首頁</div></div>
+        <div class="tab">🤖<div class="tab-text">AI</div></div>
+        <div class="tab">📷<div class="tab-text">掃描</div></div>
+        <div class="tab">👤<div class="tab-text">我的</div></div>
+
+    </div>
 
 </div>
 
 <script>
+
 function openUrlPage(){
-    document.getElementById("urlPage").style.display="block";
+    document.getElementById("urlPage").style.display = "block";
 }
-function closeUrlPage(){
-    document.getElementById("urlPage").style.display="none";
+
+function closePage(){
+    document.getElementById("urlPage").style.display = "none";
 }
+
 </script>
 
 </body>
