@@ -8,28 +8,26 @@
 
 <style>
 
+/* ===== 最底層背景（你要的 #1100F9）===== */
 html, body{
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
+
+    background: #1100F9;
 }
 
-body{
-    background: #000;
-}
-
-/* ===== App ===== */
+/* ===== App（保留原本漸層）===== */
 .app{
     width: 100%;
     height: 100vh;
-
     position: relative;
 
     background: linear-gradient(
         360deg,
         #0091FF 0%,
-        #000000 49.52%,
+        #000000 50%,
         #1100FF 100%
     );
 
@@ -41,6 +39,12 @@ body{
     font-family: "SF Pro", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* ===== 上移容器 ===== */
+.content{
+    position: relative;
+    transform: translateY(-60px);
+}
+
 /* ===== Title ===== */
 .title{
     position: absolute;
@@ -49,8 +53,7 @@ body{
 
     font-size: 30px;
     font-weight: 1000;
-    color: white;
-
+    color: #fff;
     text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 
@@ -78,42 +81,13 @@ body{
 }
 
 /* ===== Rectangles ===== */
-.rect2{
-    left: 20px;
-    right: 20px;
-    top: 143px;
-    height: 200px;
-}
+.rect2{ left: 20px; right: 20px; top: 143px; height: 200px; }
+.rect3{ left: 20px; top: 363px; width: calc(50% - 30px); height: 170px; }
+.rect4{ right: 20px; top: 363px; width: calc(50% - 30px); height: 170px; }
+.rect5{ left: 20px; top: 553px; width: calc(50% - 30px); height: 170px; }
+.rect6{ right: 20px; top: 553px; width: calc(50% - 30px); height: 170px; }
 
-.rect3{
-    left: 20px;
-    top: 363px;
-    width: calc(50% - 30px);
-    height: 170px;
-}
-
-.rect4{
-    right: 20px;
-    top: 363px;
-    width: calc(50% - 30px);
-    height: 170px;
-}
-
-.rect5{
-    left: 20px;
-    top: 553px;
-    width: calc(50% - 30px);
-    height: 170px;
-}
-
-.rect6{
-    right: 20px;
-    top: 553px;
-    width: calc(50% - 30px);
-    height: 170px;
-}
-
-/* ===== Rectangle 1 (Frame 1 Bottom Nav) ===== */
+/* ===== Bottom Nav ===== */
 .rect1{
     position: absolute;
 
@@ -132,55 +106,40 @@ body{
     border: 1px solid rgba(255,255,255,0.18);
 
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
     align-items: center;
 
     box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 
-/* ===== Group (Tab Item) ===== */
+/* ===== Tabs ===== */
 .tab{
-    width: 30px;
-    height: 43px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-
-    position: relative;
+    justify-content: center;
 
     color: white;
 }
 
-/* icon */
-.tab-icon{
-    font-size: 18px;
-}
+.tab-icon{ font-size: 18px; }
 
-/* text */
 .tab-text{
-    position: absolute;
-    top: 25px;
-
-    font-size: 15px;
-    color: #fff;
-
-    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    font-size: 12px;
+    margin-top: 4px;
 }
 
-/* ===== Card Text ===== */
+/* ===== Card text ===== */
 .icon{
     position: absolute;
-    color: white;
+    color: #fff;
     font-weight: 1000;
     text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 
 .text-main{
     position: absolute;
-    color: white;
+    color: #fff;
     font-weight: 700;
 }
 
@@ -196,67 +155,60 @@ body{
 
 <div class="app">
 
-    <!-- Title -->
-    <div class="title">反詐騙IQA</div>
-    <div class="subtitle">您的AI反詐騙智能小助手</div>
+    <div class="content">
 
-    <!-- Rect2 -->
-    <div class="rect2 glass">
-        <div class="icon" style="left:20px; top:20px; font-size:80px;">🛡️</div>
-        <div class="text-main" style="left:20px; top:115px; font-size:20px;">安全分數 98</div>
-        <div class="text-sub" style="left:20px; top:140px; font-size:15px;">今天尚未發現高風險詐騙活動</div>
+        <div class="title">反詐騙IQA</div>
+        <div class="subtitle">您的AI反詐騙智能小助手</div>
+
+        <div class="rect2 glass">
+            <div class="icon" style="left:20px; top:20px; font-size:80px;">🛡️</div>
+            <div class="text-main" style="left:20px; top:115px; font-size:20px;">安全分數 98</div>
+            <div class="text-sub" style="left:20px; top:140px; font-size:15px;">今天尚未發現高風險詐騙活動</div>
+        </div>
+
+        <div class="rect3 glass">
+            <div class="icon" style="left:20px; top:20px; font-size:50px;">💬</div>
+            <div class="text-main" style="left:20px; top:115px; font-size:15px;">訊息分析</div>
+            <div class="text-sub" style="left:20px; top:140px; font-size:10px;">檢查簡訊與聊天內容</div>
+        </div>
+
+        <div class="rect4 glass">
+            <div class="icon" style="left:20px; top:20px; font-size:50px;">📞</div>
+            <div class="text-main" style="left:20px; top:115px; font-size:15px;">電話查詢</div>
+            <div class="text-sub" style="left:20px; top:140px; font-size:10px;">識別可疑來電</div>
+        </div>
+
+        <div class="rect5 glass">
+            <div class="icon" style="left:20px; top:20px; font-size:50px;">🌐</div>
+            <div class="text-main" style="left:20px; top:115px; font-size:15px;">網址檢查</div>
+            <div class="text-sub" style="left:20px; top:140px; font-size:10px;">驗證網站安全性</div>
+        </div>
+
+        <div class="rect6 glass">
+            <div class="icon" style="left:20px; top:20px; font-size:50px;">🚨</div>
+            <div class="text-main" style="left:20px; top:115px; font-size:15px;">最新案例</div>
+            <div class="text-sub" style="left:20px; top:140px; font-size:10px;">掌握詐騙趨勢</div>
+        </div>
+
     </div>
 
-    <!-- Rect3 -->
-    <div class="rect3 glass">
-        <div class="icon" style="left:20px; top:20px; font-size:50px;">💬</div>
-        <div class="text-main" style="left:20px; top:115px; font-size:15px;">訊息分析</div>
-        <div class="text-sub" style="left:20px; top:140px; font-size:10px;">檢查簡訊與聊天內容</div>
-    </div>
-
-    <!-- Rect4 -->
-    <div class="rect4 glass">
-        <div class="icon" style="left:20px; top:20px; font-size:50px;">📞</div>
-        <div class="text-main" style="left:20px; top:115px; font-size:15px;">電話查詢</div>
-        <div class="text-sub" style="left:20px; top:140px; font-size:10px;">識別可疑來電</div>
-    </div>
-
-    <!-- Rect5 -->
-    <div class="rect5 glass">
-        <div class="icon" style="left:20px; top:20px; font-size:50px;">🌐</div>
-        <div class="text-main" style="left:20px; top:115px; font-size:15px;">網址檢查</div>
-        <div class="text-sub" style="left:20px; top:140px; font-size:10px;">驗證網站安全性</div>
-    </div>
-
-    <!-- Rect6 -->
-    <div class="rect6 glass">
-        <div class="icon" style="left:20px; top:20px; font-size:50px;">🚨</div>
-        <div class="text-main" style="left:20px; top:115px; font-size:15px;">最新案例</div>
-        <div class="text-sub" style="left:20px; top:140px; font-size:10px;">掌握詐騙趨勢</div>
-    </div>
-
-    <!-- Frame 1 / Rectangle 1 -->
     <div class="rect1">
 
-        <!-- Group 1 -->
         <div class="tab">
             <div class="tab-icon">🏠</div>
             <div class="tab-text">首頁</div>
         </div>
 
-        <!-- Group 2 -->
         <div class="tab">
             <div class="tab-icon">🤖</div>
             <div class="tab-text">AI</div>
         </div>
 
-        <!-- Group 3 -->
         <div class="tab">
             <div class="tab-icon">📷</div>
             <div class="tab-text">掃描</div>
         </div>
 
-        <!-- Group 4 -->
         <div class="tab">
             <div class="tab-icon">👤</div>
             <div class="tab-text">我的</div>
