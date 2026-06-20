@@ -163,52 +163,96 @@ html,body{
     font-size:30px;
     font-weight:1000;
 }
-.url-card{
+.rect7{
     position:absolute;
+
+    width:400px;
+    height:400px;
+
     left:20px;
-    right:20px;
-    top:170px;
-    height:140px;
-    background:rgba(255,255,255,.1);
-    border:1px solid rgba(255,255,255,.18);
+    top:278px;
+
+    background:rgba(255,255,255,0.1);
+
     border-radius:40px;
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    box-shadow:0 4px 12px rgba(0,0,0,.25);
+
+    box-shadow:0px 4px 4px rgba(0,0,0,0.25);
+}
+
+.rect8{
+    position:absolute;
+
+    width:360px;
+    height:50px;
+
+    left:40px;
+    top:400px;
+
+    background:rgba(217,217,217,0.1);
+
+    border-radius:25px;
+
+    box-shadow:0px 4px 4px rgba(0,0,0,0.25);
+}
+
+.rect9{
+    position:absolute;
+
+    width:70px;
+    height:30px;
+
+    left:320px;
+    top:410px;
+
+    background:#2949CB;
+
+    border-radius:18px;
+
+    box-shadow:0px 4px 4px rgba(0,0,0,0.25);
 }
 </style>
 </head>
 <body>
+
 <div class="app">
+
 <div class="content">
+
     <div class="title">反詐騙IQA</div>
     <div class="subtitle">您的AI反詐騙智能小助手</div>
+
     <div class="rect2 glass">
         <div class="icon" style="left:20px;top:20px;font-size:80px;">🛡️</div>
         <div class="text-main" style="left:20px;top:115px;font-size:20px;">安全分數 98</div>
         <div class="text-sub" style="left:20px;top:140px;font-size:15px;">今天尚未發現高風險詐騙活動</div>
     </div>
+
     <div class="rect3 glass">
         <div class="icon" style="left:20px;top:20px;font-size:50px;">💬</div>
         <div class="text-main" style="left:20px;top:115px;font-size:15px;">訊息分析</div>
         <div class="text-sub" style="left:20px;top:140px;font-size:10px;">檢查簡訊與聊天內容</div>
     </div>
+
     <div class="rect4 glass">
         <div class="icon" style="left:20px;top:20px;font-size:50px;">📞</div>
         <div class="text-main" style="left:20px;top:115px;font-size:15px;">電話查詢</div>
         <div class="text-sub" style="left:20px;top:140px;font-size:10px;">識別可疑來電</div>
     </div>
+
     <div class="rect5 glass" onclick="openUrlPage()">
         <div class="icon" style="left:20px;top:20px;font-size:50px;">🌐</div>
         <div class="text-main" style="left:20px;top:115px;font-size:15px;">網址檢查</div>
         <div class="text-sub" style="left:20px;top:140px;font-size:10px;">驗證網站安全性</div>
     </div>
+
     <div class="rect6 glass">
         <div class="icon" style="left:20px;top:20px;font-size:50px;">🚨</div>
         <div class="text-main" style="left:20px;top:115px;font-size:15px;">最新案例</div>
         <div class="text-sub" style="left:20px;top:140px;font-size:10px;">掌握詐騙趨勢</div>
     </div>
+
 </div>
+
 <div class="rect1">
     <div class="tab">
         <div class="tab-icon">🏠</div>
@@ -227,23 +271,44 @@ html,body{
         <div class="tab-text">我的</div>
     </div>
 </div>
+
+<!-- ===== 網址檢查頁 ===== -->
 <div id="urlPage" class="page">
+
     <div class="page-header" onclick="closeUrlPage()">
         ← 返回
     </div>
+
     <div class="page-title">
         網址檢查
     </div>
+
+    <!-- Rectangle 7 -->
+    <div class="rect7"></div>
+
+    <!-- Rectangle 8 -->
+    <div class="rect8"></div>
+
+    <!-- Rectangle 9 -->
+    <div class="rect9"></div>
+
     <div class="url-card"></div>
+
 </div>
+
 </div>
+
 <script>
+
 function openUrlPage(){
     document.getElementById("urlPage").style.display="block";
 }
+
 function closeUrlPage(){
     document.getElementById("urlPage").style.display="none";
 }
+
 </script>
+
 </body>
 </html>
