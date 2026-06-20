@@ -2,214 +2,191 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>IQA</title>
+<title>反詐騙IQA</title>
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
--webkit-tap-highlight-color:transparent;
-font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-}
-
-html,body{
-height:100%;
-background:#000;
-overflow:hidden;
+html, body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
 
 body{
-display:flex;
-justify-content:center;
+    background: #000;
 }
 
+/* ===== App ===== */
 .app{
-width:100%;
-max-width:500px;
-height:100vh;
-position:relative;
-overflow:hidden;
-background:
-radial-gradient(circle at top,#1b3dff 0%,transparent 40%),
-radial-gradient(circle at bottom,#00c2ff 0%,transparent 40%),
-#050505;
+    width: 100%;
+    height: 100vh;
+
+    position: relative;
+
+    background: linear-gradient(
+        360deg,
+        #0091FF 0%,
+        #000000 49.52%,
+        #1100FF 100%
+    );
+
+    overflow: hidden;
 }
 
-.header{
-padding-top:calc(env(safe-area-inset-top) + 24px);
-padding-left:24px;
-padding-right:24px;
+/* ===== 字體 ===== */
+*{
+    font-family: "SF Pro", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.logo{
-font-size:42px;
-font-weight:800;
-color:white;
-letter-spacing:-2px;
+/* ===== Title ===== */
+.title{
+    position: absolute;
+    left: 20px;
+    top: 60px;
+
+    font-size: 30px;
+    font-weight: 1000;
+    color: white;
+
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 
 .subtitle{
-margin-top:8px;
-color:rgba(255,255,255,.7);
-font-size:15px;
+    position: absolute;
+    left: 20px;
+    top: 106px;
+
+    font-size: 15px;
+    color: #8C8C8C;
 }
 
-.hero{
-margin:24px;
-padding:28px;
-border-radius:34px;
+/* ===== glass ===== */
+.glass{
+    position: absolute;
+    background: rgba(255,255,255,0.1);
+    border-radius: 40px;
 
-background:rgba(255,255,255,.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 
-backdrop-filter:blur(30px);
--webkit-backdrop-filter:blur(30px);
+    border: 1px solid rgba(255,255,255,0.18);
 
-border:1px solid rgba(255,255,255,.1);
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
 }
 
-.heroIcon{
-font-size:64px;
+/* ===== Rectangles ===== */
+.rect2{
+    left: 20px;
+    right: 20px;
+    top: 143px;
+    height: 200px;
 }
 
-.heroTitle{
-margin-top:12px;
-font-size:28px;
-font-weight:700;
-color:white;
+.rect3{
+    left: 20px;
+    top: 363px;
+    width: calc(50% - 30px);
+    height: 170px;
 }
 
-.heroText{
-margin-top:10px;
-line-height:1.5;
-color:rgba(255,255,255,.65);
+.rect4{
+    right: 20px;
+    top: 363px;
+    width: calc(50% - 30px);
+    height: 170px;
 }
 
-.grid{
-padding:0 24px;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:14px;
+.rect5{
+    left: 20px;
+    top: 553px;
+    width: calc(50% - 30px);
+    height: 170px;
 }
 
-.card{
-height:150px;
-
-border-radius:28px;
-
-background:rgba(255,255,255,.08);
-
-backdrop-filter:blur(30px);
--webkit-backdrop-filter:blur(30px);
-
-border:1px solid rgba(255,255,255,.1);
-
-padding:18px;
-
-display:flex;
-flex-direction:column;
-
-cursor:pointer;
-
-transition:.25s;
+.rect6{
+    right: 20px;
+    top: 553px;
+    width: calc(50% - 30px);
+    height: 170px;
 }
 
-.card:active{
-transform:scale(.96);
+/* ===== Rectangle 1 (Frame 1 Bottom Nav) ===== */
+.rect1{
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+
+    height: 90px;
+
+    background: rgba(255,255,255,0.1);
+    border-radius: 50px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 
-.icon{
-font-size:32px;
-}
-
-.title{
-margin-top:auto;
-color:white;
-font-weight:600;
-font-size:17px;
-}
-
-.desc{
-margin-top:4px;
-font-size:12px;
-color:rgba(255,255,255,.55);
-}
-
-.tabbar{
-position:absolute;
-left:20px;
-right:20px;
-bottom:calc(env(safe-area-inset-bottom) + 14px);
-
-height:72px;
-
-background:rgba(255,255,255,.08);
-
-backdrop-filter:blur(40px);
--webkit-backdrop-filter:blur(40px);
-
-border:1px solid rgba(255,255,255,.1);
-
-border-radius:999px;
-
-display:flex;
-align-items:center;
-justify-content:space-around;
-}
-
+/* ===== Group (Tab Item) ===== */
 .tab{
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:4px;
+    width: 30px;
+    height: 43px;
 
-color:rgba(255,255,255,.6);
-font-size:12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    position: relative;
+
+    color: white;
 }
 
-.tab.active{
-color:white;
+/* icon */
+.tab-icon{
+    font-size: 18px;
 }
 
-.scanButton{
+/* text */
+.tab-text{
+    position: absolute;
+    top: 25px;
 
-position:absolute;
+    font-size: 15px;
+    color: #fff;
 
-left:50%;
-transform:translateX(-50%);
-
-bottom:115px;
-
-width:78px;
-height:78px;
-
-border:none;
-border-radius:50%;
-
-background:linear-gradient(
-135deg,
-#00d2ff,
-#0066ff
-);
-
-color:white;
-font-size:34px;
-
-box-shadow:
-0 10px 35px rgba(0,120,255,.5);
-
-cursor:pointer;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 
-.page{
-display:none;
+/* ===== Card Text ===== */
+.icon{
+    position: absolute;
+    color: white;
+    font-weight: 1000;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 
-.page.active{
-display:block;
+.text-main{
+    position: absolute;
+    color: white;
+    font-weight: 700;
+}
+
+.text-sub{
+    position: absolute;
+    color: #8C8C8C;
 }
 
 </style>
@@ -219,82 +196,73 @@ display:block;
 
 <div class="app">
 
-<div id="home" class="page active">
+    <!-- Title -->
+    <div class="title">反詐騙IQA</div>
+    <div class="subtitle">您的AI反詐騙智能小助手</div>
 
-<div class="header">
-<div class="logo">IQA</div>
-<div class="subtitle">
-AI 反詐騙智能助手
-</div>
-</div>
+    <!-- Rect2 -->
+    <div class="rect2 glass">
+        <div class="icon" style="left:20px; top:20px; font-size:80px;">🛡️</div>
+        <div class="text-main" style="left:20px; top:115px; font-size:20px;">安全分數 98</div>
+        <div class="text-sub" style="left:20px; top:140px; font-size:15px;">今天尚未發現高風險詐騙活動</div>
+    </div>
 
-<div class="hero">
-<div class="heroIcon">🛡️</div>
-<div class="heroTitle">
-安全分數 98
-</div>
-<div class="heroText">
-今天尚未發現高風險詐騙活動
-</div>
-</div>
+    <!-- Rect3 -->
+    <div class="rect3 glass">
+        <div class="icon" style="left:20px; top:20px; font-size:50px;">💬</div>
+        <div class="text-main" style="left:20px; top:115px; font-size:15px;">訊息分析</div>
+        <div class="text-sub" style="left:20px; top:140px; font-size:10px;">檢查簡訊與聊天內容</div>
+    </div>
 
-<div class="grid">
+    <!-- Rect4 -->
+    <div class="rect4 glass">
+        <div class="icon" style="left:20px; top:20px; font-size:50px;">📞</div>
+        <div class="text-main" style="left:20px; top:115px; font-size:15px;">電話查詢</div>
+        <div class="text-sub" style="left:20px; top:140px; font-size:10px;">識別可疑來電</div>
+    </div>
 
-<div class="card">
-<div class="icon">💬</div>
-<div class="title">訊息分析</div>
-<div class="desc">檢查簡訊與聊天內容</div>
-</div>
+    <!-- Rect5 -->
+    <div class="rect5 glass">
+        <div class="icon" style="left:20px; top:20px; font-size:50px;">🌐</div>
+        <div class="text-main" style="left:20px; top:115px; font-size:15px;">網址檢查</div>
+        <div class="text-sub" style="left:20px; top:140px; font-size:10px;">驗證網站安全性</div>
+    </div>
 
-<div class="card">
-<div class="icon">📞</div>
-<div class="title">電話查詢</div>
-<div class="desc">識別可疑來電</div>
-</div>
+    <!-- Rect6 -->
+    <div class="rect6 glass">
+        <div class="icon" style="left:20px; top:20px; font-size:50px;">🚨</div>
+        <div class="text-main" style="left:20px; top:115px; font-size:15px;">最新案例</div>
+        <div class="text-sub" style="left:20px; top:140px; font-size:10px;">掌握詐騙趨勢</div>
+    </div>
 
-<div class="card">
-<div class="icon">🌐</div>
-<div class="title">網址檢查</div>
-<div class="desc">驗證網站安全性</div>
-</div>
+    <!-- Frame 1 / Rectangle 1 -->
+    <div class="rect1">
 
-<div class="card">
-<div class="icon">🚨</div>
-<div class="title">最新案例</div>
-<div class="desc">掌握詐騙趨勢</div>
-</div>
+        <!-- Group 1 -->
+        <div class="tab">
+            <div class="tab-icon">🏠</div>
+            <div class="tab-text">首頁</div>
+        </div>
 
-</div>
+        <!-- Group 2 -->
+        <div class="tab">
+            <div class="tab-icon">🤖</div>
+            <div class="tab-text">AI</div>
+        </div>
 
-</div>
+        <!-- Group 3 -->
+        <div class="tab">
+            <div class="tab-icon">📷</div>
+            <div class="tab-text">掃描</div>
+        </div>
 
-<button class="scanButton">
-✨
-</button>
+        <!-- Group 4 -->
+        <div class="tab">
+            <div class="tab-icon">👤</div>
+            <div class="tab-text">我的</div>
+        </div>
 
-<div class="tabbar">
-
-<div class="tab active">
-🏠
-<div>首頁</div>
-</div>
-
-<div class="tab">
-🤖
-<div>AI</div>
-</div>
-
-<div class="tab">
-📊
-<div>掃描</div>
-</div>
-
-<div class="tab">
-👤
-<div>我的</div>
-</div>
-
-</div>
+    </div>
 
 </div>
 
