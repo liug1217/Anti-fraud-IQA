@@ -2,274 +2,301 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IQA 反詐騙助手</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<title>IQA</title>
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+}
+
+html,body{
+height:100%;
+background:#000;
+overflow:hidden;
 }
 
 body{
-    background:#f5f5f7;
+display:flex;
+justify-content:center;
+}
+
+.app{
+width:100%;
+max-width:500px;
+height:100vh;
+position:relative;
+overflow:hidden;
+background:
+radial-gradient(circle at top,#1b3dff 0%,transparent 40%),
+radial-gradient(circle at bottom,#00c2ff 0%,transparent 40%),
+#050505;
 }
 
 .header{
-    background:#007AFF;
-    color:white;
-    text-align:center;
-    padding:20px;
-    font-size:24px;
-    font-weight:700;
+padding-top:calc(env(safe-area-inset-top) + 24px);
+padding-left:24px;
+padding-right:24px;
 }
 
-.container{
-    max-width:500px;
-    margin:auto;
-    padding:15px;
+.logo{
+font-size:42px;
+font-weight:800;
+color:white;
+letter-spacing:-2px;
+}
+
+.subtitle{
+margin-top:8px;
+color:rgba(255,255,255,.7);
+font-size:15px;
+}
+
+.hero{
+margin:24px;
+padding:28px;
+border-radius:34px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(30px);
+-webkit-backdrop-filter:blur(30px);
+
+border:1px solid rgba(255,255,255,.1);
+}
+
+.heroIcon{
+font-size:64px;
+}
+
+.heroTitle{
+margin-top:12px;
+font-size:28px;
+font-weight:700;
+color:white;
+}
+
+.heroText{
+margin-top:10px;
+line-height:1.5;
+color:rgba(255,255,255,.65);
+}
+
+.grid{
+padding:0 24px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
 }
 
 .card{
-    background:white;
-    border-radius:20px;
-    padding:18px;
-    margin-bottom:15px;
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
+height:150px;
+
+border-radius:28px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(30px);
+-webkit-backdrop-filter:blur(30px);
+
+border:1px solid rgba(255,255,255,.1);
+
+padding:18px;
+
+display:flex;
+flex-direction:column;
+
+cursor:pointer;
+
+transition:.25s;
 }
 
-.card h2{
-    margin-bottom:12px;
-    font-size:18px;
+.card:active{
+transform:scale(.96);
 }
 
-input,
-textarea{
-    width:100%;
-    padding:12px;
-    border:1px solid #ddd;
-    border-radius:12px;
-    margin-bottom:10px;
-    font-size:15px;
+.icon{
+font-size:32px;
 }
 
-button{
-    width:100%;
-    border:none;
-    background:#007AFF;
-    color:white;
-    padding:12px;
-    border-radius:12px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:600;
+.title{
+margin-top:auto;
+color:white;
+font-weight:600;
+font-size:17px;
 }
 
-button:hover{
-    opacity:.9;
+.desc{
+margin-top:4px;
+font-size:12px;
+color:rgba(255,255,255,.55);
 }
 
-.result{
-    margin-top:12px;
-    padding:12px;
-    border-radius:12px;
-    background:#f2f2f7;
+.tabbar{
+position:absolute;
+left:20px;
+right:20px;
+bottom:calc(env(safe-area-inset-bottom) + 14px);
+
+height:72px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(40px);
+-webkit-backdrop-filter:blur(40px);
+
+border:1px solid rgba(255,255,255,.1);
+
+border-radius:999px;
+
+display:flex;
+align-items:center;
+justify-content:space-around;
 }
 
-.safe{
-    color:#34C759;
-    font-weight:700;
+.tab{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:4px;
+
+color:rgba(255,255,255,.6);
+font-size:12px;
 }
 
-.warning{
-    color:#FF9500;
-    font-weight:700;
+.tab.active{
+color:white;
 }
 
-.danger{
-    color:#FF3B30;
-    font-weight:700;
+.scanButton{
+
+position:absolute;
+
+left:50%;
+transform:translateX(-50%);
+
+bottom:115px;
+
+width:78px;
+height:78px;
+
+border:none;
+border-radius:50%;
+
+background:linear-gradient(
+135deg,
+#00d2ff,
+#0066ff
+);
+
+color:white;
+font-size:34px;
+
+box-shadow:
+0 10px 35px rgba(0,120,255,.5);
+
+cursor:pointer;
 }
 
-.footer{
-    text-align:center;
-    padding:20px;
-    color:#999;
+.page{
+display:none;
 }
+
+.page.active{
+display:block;
+}
+
 </style>
 </head>
 
 <body>
 
+<div class="app">
+
+<div id="home" class="page active">
+
 <div class="header">
-    🛡️ IQA 反詐騙助手
+<div class="logo">IQA</div>
+<div class="subtitle">
+AI 反詐騙智能助手
+</div>
 </div>
 
-<div class="container">
+<div class="hero">
+<div class="heroIcon">🛡️</div>
+<div class="heroTitle">
+安全分數 98
+</div>
+<div class="heroText">
+今天尚未發現高風險詐騙活動
+</div>
+</div>
 
-    <div class="card">
-        <h2>📞 電話風險查詢</h2>
+<div class="grid">
 
-        <input
-            type="text"
-            id="phone"
-            placeholder="輸入電話號碼">
+<div class="card">
+<div class="icon">💬</div>
+<div class="title">訊息分析</div>
+<div class="desc">檢查簡訊與聊天內容</div>
+</div>
 
-        <button onclick="checkPhone()">
-            開始分析
-        </button>
+<div class="card">
+<div class="icon">📞</div>
+<div class="title">電話查詢</div>
+<div class="desc">識別可疑來電</div>
+</div>
 
-        <div id="phoneResult" class="result">
-            等待查詢...
-        </div>
-    </div>
+<div class="card">
+<div class="icon">🌐</div>
+<div class="title">網址檢查</div>
+<div class="desc">驗證網站安全性</div>
+</div>
 
-    <div class="card">
-        <h2>💬 詐騙訊息分析</h2>
-
-        <textarea
-            id="message"
-            rows="5"
-            placeholder="貼上簡訊、LINE訊息、Email內容"></textarea>
-
-        <button onclick="analyzeMessage()">
-            AI分析
-        </button>
-
-        <div id="messageResult" class="result">
-            等待分析...
-        </div>
-    </div>
-
-    <div class="card">
-        <h2>🌐 網址安全檢查</h2>
-
-        <input
-            type="text"
-            id="url"
-            placeholder="https://example.com">
-
-        <button onclick="checkURL()">
-            檢查網址
-        </button>
-
-        <div id="urlResult" class="result">
-            等待檢查...
-        </div>
-    </div>
+<div class="card">
+<div class="icon">🚨</div>
+<div class="title">最新案例</div>
+<div class="desc">掌握詐騙趨勢</div>
+</div>
 
 </div>
 
-<div class="footer">
-    IQA Anti Scam v1.0
 </div>
 
-<script>
+<button class="scanButton">
+✨
+</button>
 
-function checkPhone(){
+<div class="tabbar">
 
-    const phone =
-    document.getElementById("phone").value;
+<div class="tab active">
+🏠
+<div>首頁</div>
+</div>
 
-    const result =
-    document.getElementById("phoneResult");
+<div class="tab">
+🤖
+<div>AI</div>
+</div>
 
-    if(phone.length < 8){
-        result.innerHTML =
-        '<span class="warning">⚠️ 號碼格式異常</span>';
-        return;
-    }
+<div class="tab">
+📊
+<div>掃描</div>
+</div>
 
-    result.innerHTML =
-    '<span class="safe">✅ 目前未發現異常</span>';
-}
+<div class="tab">
+👤
+<div>我的</div>
+</div>
 
-function analyzeMessage(){
+</div>
 
-    const text =
-    document.getElementById("message").value
-    .toLowerCase();
-
-    const result =
-    document.getElementById("messageResult");
-
-    const keywords = [
-        "匯款",
-        "投資",
-        "中獎",
-        "點擊",
-        "驗證",
-        "帳戶",
-        "銀行",
-        "解除分期",
-        "領獎",
-        "立即"
-    ];
-
-    let score = 0;
-
-    keywords.forEach(word=>{
-        if(text.includes(word)){
-            score++;
-        }
-    });
-
-    if(score >= 3){
-        result.innerHTML =
-        '<span class="danger">🚨 高風險詐騙訊息</span><br>風險分數：'+
-        (score*20)+"/100";
-    }
-    else if(score >=1){
-        result.innerHTML =
-        '<span class="warning">⚠️ 疑似可疑訊息</span><br>風險分數：'+
-        (score*20)+"/100";
-    }
-    else{
-        result.innerHTML =
-        '<span class="safe">✅ 暫未發現詐騙特徵</span>';
-    }
-}
-
-function checkURL(){
-
-    const url =
-    document.getElementById("url").value
-    .toLowerCase();
-
-    const result =
-    document.getElementById("urlResult");
-
-    const suspicious = [
-        ".xyz",
-        ".top",
-        ".click",
-        ".vip",
-        "free",
-        "gift",
-        "bonus"
-    ];
-
-    let risk = false;
-
-    suspicious.forEach(item=>{
-        if(url.includes(item)){
-            risk = true;
-        }
-    });
-
-    if(risk){
-        result.innerHTML =
-        '<span class="danger">🚨 高風險網址</span>';
-    }
-    else{
-        result.innerHTML =
-        '<span class="safe">✅ 未發現異常</span>';
-    }
-}
-
-</script>
+</div>
 
 </body>
 </html>
