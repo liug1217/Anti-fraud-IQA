@@ -50,6 +50,7 @@ html,body{
     color:#8C8C8C;
 }
 
+/* ===== 卡片 ===== */
 .glass{
     position:absolute;
     background:rgba(255,255,255,.1);
@@ -66,6 +67,7 @@ html,body{
 .rect5{ left:20px; top:553px; width:calc(50% - 30px); height:170px; cursor:pointer; }
 .rect6{ right:20px; top:553px; width:calc(50% - 30px); height:170px; }
 
+/* ===== 底部 ===== */
 .rect1{
     position:absolute;
     left:20px;
@@ -90,11 +92,7 @@ html,body{
 .tab-icon{font-size:18px;}
 .tab-text{font-size:12px;margin-top:4px;}
 
-.icon{position:absolute;color:#fff;font-weight:1000;}
-.text-main{position:absolute;color:#fff;font-weight:700;}
-.text-sub{position:absolute;color:#8C8C8C;}
-
-/* ===== URL PAGE ===== */
+/* ===== URL頁（已刪除所有 rect7/8/9）===== */
 .page{
     position:absolute;
     inset:0;
@@ -103,7 +101,6 @@ html,body{
     background:linear-gradient(360deg,#0091FF 0%,#000000 50%,#1100FF 100%);
 }
 
-/* 🌐 header */
 .url-icon{
     position:absolute;
     left:40px;
@@ -129,7 +126,6 @@ html,body{
     color:#8C8C8C;
 }
 
-/* input */
 .input-label{
     position:absolute;
     left:60px;
@@ -157,7 +153,6 @@ html,body{
     cursor:pointer;
 }
 
-/* result */
 .check-icon{
     position:absolute;
     left:40px;
@@ -172,7 +167,6 @@ html,body{
     font-size:15px;
     color:#fff;
 }
-
 </style>
 </head>
 
@@ -185,46 +179,22 @@ html,body{
     <div class="title">反詐騙IQA</div>
     <div class="subtitle">您的AI反詐騙智能小助手</div>
 
-    <div class="rect2 glass">
-        <div class="icon" style="left:20px;top:20px;font-size:80px;">🛡️</div>
-        <div class="text-main" style="left:20px;top:115px;font-size:20px;">安全分數 98</div>
-        <div class="text-sub" style="left:20px;top:140px;font-size:15px;">今天尚未發現高風險詐騙活動</div>
-    </div>
-
-    <div class="rect3 glass">
-        <div class="icon" style="left:20px;top:20px;font-size:50px;">💬</div>
-        <div class="text-main" style="left:20px;top:115px;font-size:15px;">訊息分析</div>
-        <div class="text-sub" style="left:20px;top:140px;font-size:10px;">檢查簡訊與聊天內容</div>
-    </div>
-
-    <div class="rect4 glass">
-        <div class="icon" style="left:20px;top:20px;font-size:50px;">📞</div>
-        <div class="text-main" style="left:20px;top:115px;font-size:15px;">電話查詢</div>
-        <div class="text-sub" style="left:20px;top:140px;font-size:10px;">識別可疑來電</div>
-    </div>
-
-    <div class="rect5 glass" onclick="openUrlPage()">
-        <div class="icon" style="left:20px;top:20px;font-size:50px;">🌐</div>
-        <div class="text-main" style="left:20px;top:115px;font-size:15px;">網址檢查</div>
-        <div class="text-sub" style="left:20px;top:140px;font-size:10px;">驗證網站安全性</div>
-    </div>
-
-    <div class="rect6 glass">
-        <div class="icon" style="left:20px;top:20px;font-size:50px;">🚨</div>
-        <div class="text-main" style="left:20px;top:115px;font-size:15px;">最新案例</div>
-        <div class="text-sub" style="left:20px;top:140px;font-size:10px;">掌握詐騙趨勢</div>
-    </div>
+    <div class="rect2 glass"></div>
+    <div class="rect3 glass"></div>
+    <div class="rect4 glass"></div>
+    <div class="rect5 glass" onclick="openUrlPage()"></div>
+    <div class="rect6 glass"></div>
 
 </div>
 
 <div class="rect1">
-    <div class="tab"><div class="tab-icon">🏠</div><div class="tab-text">首頁</div></div>
-    <div class="tab"><div class="tab-icon">🤖</div><div class="tab-text">AI</div></div>
-    <div class="tab"><div class="tab-icon">📷</div><div class="tab-text">掃描</div></div>
-    <div class="tab"><div class="tab-icon">👤</div><div class="tab-text">我的</div></div>
+    <div class="tab">🏠<div class="tab-text">首頁</div></div>
+    <div class="tab">🤖<div class="tab-text">AI</div></div>
+    <div class="tab">📷<div class="tab-text">掃描</div></div>
+    <div class="tab">👤<div class="tab-text">我的</div></div>
 </div>
 
-<!-- URL PAGE（已修正，不再重複 rect） -->
+<!-- URL PAGE（乾淨版） -->
 <div id="urlPage" class="page">
 
     <div class="url-icon">🌐</div>
@@ -246,7 +216,6 @@ html,body{
 function openUrlPage(){
     document.getElementById("urlPage").style.display="block";
 }
-
 function closeUrlPage(){
     document.getElementById("urlPage").style.display="none";
 }
