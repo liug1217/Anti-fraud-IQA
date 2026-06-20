@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IQA 反詐騙助手</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+body{
+    background:#f5f5f7;
+}
+
+.header{
+    background:#007AFF;
+    color:white;
+    text-align:center;
+    padding:20px;
+    font-size:24px;
+    font-weight:700;
+}
+
+.container{
+    max-width:500px;
+    margin:auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:18px;
+    margin-bottom:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.card h2{
+    margin-bottom:12px;
+    font-size:18px;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    margin-bottom:10px;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    border:none;
+    background:#007AFF;
+    color:white;
+    padding:12px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.result{
+    margin-top:12px;
+    padding:12px;
+    border-radius:12px;
+    background:#f2f2f7;
+}
+
+.safe{
+    color:#34C759;
+    font-weight:700;
+}
+
+.warning{
+    color:#FF9500;
+    font-weight:700;
+}
+
+.danger{
+    color:#FF3B30;
+    font-weight:700;
+}
+
+.footer{
+    text-align:center;
+    padding:20px;
+    color:#999;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    🛡️ IQA 反詐騙助手
+</div>
+
+<div class="container">
+
+    <div class="card">
+        <h2>📞 電話風險查詢</h2>
+
+        <input
+            type="text"
+            id="phone"
+            placeholder="輸入電話號碼">
+
+        <button onclick="checkPhone()">
+            開始分析
+        </button>
+
+        <div id="phoneResult" class="result">
+            等待查詢...
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>💬 詐騙訊息分析</h2>
+
+        <textarea
+            id="message"
+            rows="5"
+            placeholder="貼上簡訊、LINE訊息、Email內容"></textarea>
+
+        <button onclick="analyzeMessage()">
+            AI分析
+        </button>
+
+        <div id="messageResult" class="result">
+            等待分析...
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🌐 網址安全檢查</h2>
+
+        <input
+            type="text"
+            id="url"
+            placeholder="https://example.com">
+
+        <button onclick="checkURL()">
+            檢查網址
+        </button>
+
+        <div id="urlResult" class="result">
+            等待檢查...
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    IQA Anti Scam v1.0
+</div>
+
+<script>
+
+function checkPhone(){
+
+    const phone =
+    document.getElementById("phone").value;
+
+    const result =
+    document.getElementById("phoneResult");
+
+    if(phone.length < 8){
+        result.innerHTML =
+        '<span class="warning">⚠️ 號碼格式異常</span>';
+        return;
+    }
+
+    result.innerHTML =
+    '<span class="safe">✅ 目前未發現異常</span>';
+}
+
+function analyzeMessage(){
+
+    const text =
+    document.getElementById("message").value
+    .toLowerCase();
+
+    const result =
+    document.getElementById("messageResult");
+
+    const keywords = [
+        "匯款",
+        "投資",
+        "中獎",
+        "點擊",
+        "驗證",
+        "帳戶",
+        "銀行",
+        "解除分期",
+        "領獎",
+        "立即"
+    ];
+
+    let score = 0;
+
+    keywords.forEach(word=>{
+        if(text.includes(word)){
+            score++;
+        }
+    });
+
+    if(score >= 3){
+        result.innerHTML =
+        '<span class="danger">🚨 高風險詐騙訊息</span><br>風險分數：'+
+        (score*20)+"/100";
+    }
+    else if(score >=1){
+        result.innerHTML =
+        '<span class="warning">⚠️ 疑似可疑訊息</span><br>風險分數：'+
+        (score*20)+"/100";
+    }
+    else{
+        result.innerHTML =
+        '<span class="safe">✅ 暫未發現詐騙特徵</span>';
+    }
+}
+
+function checkURL(){
+
+    const url =
+    document.getElementById("url").value
+    .toLowerCase();
+
+    const result =
+    document.getElementById("urlResult");
+
+    const suspicious = [
+        ".xyz",
+        ".top",
+        ".click",
+        ".vip",
+        "free",
+        "gift",
+        "bonus"
+    ];
+
+    let risk = false;
+
+    suspicious.forEach(item=>{
+        if(url.includes(item)){
+            risk = true;
+        }
+    });
+
+    if(risk){
+        result.innerHTML =
+        '<span class="danger">🚨 高風險網址</span>';
+    }
+    else{
+        result.innerHTML =
+        '<span class="safe">✅ 未發現異常</span>';
+    }
+}
+
+</script>
+
+</body>
+</html>
