@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>反詐騙IQA</title>
+
 <style>
 html,body{
     margin:0;
@@ -12,26 +13,25 @@ html,body{
     height:100%;
     background:#1100F9;
 }
+
 *{
     font-family:"SF Pro",-apple-system,BlinkMacSystemFont,sans-serif;
     box-sizing:border-box;
 }
+
 .app{
     width:100%;
     height:100vh;
     position:relative;
-    background:linear-gradient(
-        360deg,
-        #0091FF 0%,
-        #000000 50%,
-        #1100FF 100%
-    );
+    background:linear-gradient(360deg,#0091FF 0%,#000000 50%,#1100FF 100%);
     overflow:hidden;
 }
+
 .content{
     position:relative;
     transform:translateY(-60px);
 }
+
 .title{
     position:absolute;
     left:20px;
@@ -41,6 +41,7 @@ html,body{
     color:#fff;
     text-shadow:0 4px 4px rgba(0,0,0,.25);
 }
+
 .subtitle{
     position:absolute;
     left:20px;
@@ -48,6 +49,7 @@ html,body{
     font-size:15px;
     color:#8C8C8C;
 }
+
 .glass{
     position:absolute;
     background:rgba(255,255,255,.1);
@@ -57,37 +59,13 @@ html,body{
     box-shadow:0 4px 12px rgba(0,0,0,.25);
     border-radius:40px;
 }
-.rect2{
-    left:20px;
-    right:20px;
-    top:143px;
-    height:200px;
-}
-.rect3{
-    left:20px;
-    top:363px;
-    width:calc(50% - 30px);
-    height:170px;
-}
-.rect4{
-    right:20px;
-    top:363px;
-    width:calc(50% - 30px);
-    height:170px;
-}
-.rect5{
-    left:20px;
-    top:553px;
-    width:calc(50% - 30px);
-    height:170px;
-    cursor:pointer;
-}
-.rect6{
-    right:20px;
-    top:553px;
-    width:calc(50% - 30px);
-    height:170px;
-}
+
+.rect2{ left:20px; right:20px; top:143px; height:200px; }
+.rect3{ left:20px; top:363px; width:calc(50% - 30px); height:170px; }
+.rect4{ right:20px; top:363px; width:calc(50% - 30px); height:170px; }
+.rect5{ left:20px; top:553px; width:calc(50% - 30px); height:170px; cursor:pointer; }
+.rect6{ right:20px; top:553px; width:calc(50% - 30px); height:170px; }
+
 .rect1{
     position:absolute;
     left:20px;
@@ -97,124 +75,39 @@ html,body{
     background:rgba(255,255,255,.1);
     border:1px solid rgba(255,255,255,.18);
     border-radius:50px;
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
     display:flex;
     justify-content:space-around;
     align-items:center;
-    box-shadow:0 4px 12px rgba(0,0,0,.25);
 }
+
 .tab{
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
     color:#fff;
 }
-.tab-icon{
-    font-size:18px;
-}
-.tab-text{
-    font-size:12px;
-    margin-top:4px;
-}
-.icon{
-    position:absolute;
-    color:#fff;
-    font-weight:1000;
-    text-shadow:0 4px 4px rgba(0,0,0,.25);
-}
-.text-main{
-    position:absolute;
-    color:#fff;
-    font-weight:700;
-}
-.text-sub{
-    position:absolute;
-    color:#8C8C8C;
-}
-/* 網址檢查頁 */
+
+.tab-icon{font-size:18px;}
+.tab-text{font-size:12px;margin-top:4px;}
+
+.icon{position:absolute;color:#fff;font-weight:1000;}
+.text-main{position:absolute;color:#fff;font-weight:700;}
+.text-sub{position:absolute;color:#8C8C8C;}
+
+/* ===== URL PAGE ===== */
 .page{
     position:absolute;
     inset:0;
     display:none;
-    background:linear-gradient(
-        360deg,
-        #0091FF 0%,
-        #000000 50%,
-        #1100FF 100%
-    );
     z-index:999;
-}
-.page-header{
-    position:absolute;
-    left:20px;
-    top:60px;
-    color:#fff;
-    font-size:18px;
-    font-weight:700;
-    cursor:pointer;
-}
-.page-title{
-    position:absolute;
-    left:20px;
-    top:100px;
-    color:#fff;
-    font-size:30px;
-    font-weight:1000;
-}
-.rect7{
-    position:absolute;
-
-    width:400px;
-    height:400px;
-
-    left:20px;
-    top:278px;
-
-    background:rgba(255,255,255,0.1);
-
-    border-radius:40px;
-
-    box-shadow:0px 4px 4px rgba(0,0,0,0.25);
+    background:linear-gradient(360deg,#0091FF 0%,#000000 50%,#1100FF 100%);
 }
 
-.rect8{
-    position:absolute;
-
-    width:360px;
-    height:50px;
-
-    left:40px;
-    top:400px;
-
-    background:rgba(217,217,217,0.1);
-
-    border-radius:25px;
-
-    box-shadow:0px 4px 4px rgba(0,0,0,0.25);
-}
-
-.rect9{
-    position:absolute;
-
-    width:70px;
-    height:30px;
-
-    left:320px;
-    top:410px;
-
-    background:#2949CB;
-
-    border-radius:18px;
-
-    box-shadow:0px 4px 4px rgba(0,0,0,0.25);
-}
-    .url-icon{
+/* 🌐 header */
+.url-icon{
     position:absolute;
     left:40px;
     top:298px;
-
     font-size:50px;
     color:#fff;
 }
@@ -223,7 +116,6 @@ html,body{
     position:absolute;
     left:110px;
     top:305px;
-
     font-size:15px;
     font-weight:700;
     color:#fff;
@@ -233,66 +125,57 @@ html,body{
     position:absolute;
     left:110px;
     top:328px;
-
     font-size:10px;
     color:#8C8C8C;
 }
 
+/* input */
 .input-label{
     position:absolute;
     left:60px;
     top:416px;
-
     font-size:15px;
     color:#fff;
+}
+
+.input-box{
+    position:absolute;
+    left:40px;
+    right:40px;
+    top:450px;
+    height:50px;
+    background:rgba(217,217,217,0.1);
+    border-radius:25px;
 }
 
 .confirm-btn{
     position:absolute;
     left:340px;
     top:416px;
-
     font-size:15px;
     color:#fff;
-
     cursor:pointer;
 }
 
-.input-box{
-    position:absolute;
-
-    left:40px;
-    right:40px;
-    top:450px;
-    height:50px;
-
-    background:rgba(217,217,217,0.1);
-
-    border-radius:25px;
-
-    box-shadow:0 4px 4px rgba(0,0,0,0.25);
-}
-
+/* result */
 .check-icon{
     position:absolute;
-
     left:40px;
     top:470px;
-
     font-size:30px;
 }
 
 .check-text{
     position:absolute;
-
     left:90px;
     top:477px;
-
     font-size:15px;
     color:#fff;
 }
+
 </style>
 </head>
+
 <body>
 
 <div class="app">
@@ -334,46 +217,24 @@ html,body{
 
 </div>
 
-<!-- ===== 底部導航 ===== -->
 <div class="rect1">
-    <div class="tab">
-        <div class="tab-icon">🏠</div>
-        <div class="tab-text">首頁</div>
-    </div>
-    <div class="tab">
-        <div class="tab-icon">🤖</div>
-        <div class="tab-text">AI</div>
-    </div>
-    <div class="tab">
-        <div class="tab-icon">📷</div>
-        <div class="tab-text">掃描</div>
-    </div>
-    <div class="tab">
-        <div class="tab-icon">👤</div>
-        <div class="tab-text">我的</div>
-    </div>
+    <div class="tab"><div class="tab-icon">🏠</div><div class="tab-text">首頁</div></div>
+    <div class="tab"><div class="tab-icon">🤖</div><div class="tab-text">AI</div></div>
+    <div class="tab"><div class="tab-icon">📷</div><div class="tab-text">掃描</div></div>
+    <div class="tab"><div class="tab-icon">👤</div><div class="tab-text">我的</div></div>
 </div>
 
-<!-- ===== 網址檢查頁（已修復 Rect7/8/9）===== -->
+<!-- URL PAGE（已修正，不再重複 rect） -->
 <div id="urlPage" class="page">
 
-    <!-- 🌐 標題 -->
     <div class="url-icon">🌐</div>
-
     <div class="url-title">網址檢查</div>
     <div class="url-subtitle">驗證網站安全性</div>
 
-    <!-- 輸入區 -->
     <div class="input-label">輸入網址</div>
     <div class="input-box"></div>
     <div class="confirm-btn">確認</div>
 
-    <!-- 你說被刪錯的矩形（已補回） -->
-    <div class="rect7"></div>
-    <div class="rect8"></div>
-    <div class="rect9"></div>
-
-    <!-- 結果 -->
     <div class="check-icon">✅</div>
     <div class="check-text">本網站已確認為安全網站</div>
 
@@ -382,7 +243,6 @@ html,body{
 </div>
 
 <script>
-
 function openUrlPage(){
     document.getElementById("urlPage").style.display="block";
 }
@@ -390,7 +250,6 @@ function openUrlPage(){
 function closeUrlPage(){
     document.getElementById("urlPage").style.display="none";
 }
-
 </script>
 
 </body>
