@@ -210,6 +210,87 @@ html,body{
 
     box-shadow:0px 4px 4px rgba(0,0,0,0.25);
 }
+    .url-icon{
+    position:absolute;
+    left:40px;
+    top:298px;
+
+    font-size:50px;
+    color:#fff;
+}
+
+.url-title{
+    position:absolute;
+    left:110px;
+    top:305px;
+
+    font-size:15px;
+    font-weight:700;
+    color:#fff;
+}
+
+.url-subtitle{
+    position:absolute;
+    left:110px;
+    top:328px;
+
+    font-size:10px;
+    color:#8C8C8C;
+}
+
+.input-label{
+    position:absolute;
+    left:60px;
+    top:416px;
+
+    font-size:15px;
+    color:#fff;
+}
+
+.confirm-btn{
+    position:absolute;
+    left:340px;
+    top:416px;
+
+    font-size:15px;
+    color:#fff;
+
+    cursor:pointer;
+}
+
+.input-box{
+    position:absolute;
+
+    left:40px;
+    right:40px;
+    top:450px;
+    height:50px;
+
+    background:rgba(217,217,217,0.1);
+
+    border-radius:25px;
+
+    box-shadow:0 4px 4px rgba(0,0,0,0.25);
+}
+
+.check-icon{
+    position:absolute;
+
+    left:40px;
+    top:470px;
+
+    font-size:30px;
+}
+
+.check-text{
+    position:absolute;
+
+    left:90px;
+    top:477px;
+
+    font-size:15px;
+    color:#fff;
+}
 </style>
 </head>
 <body>
@@ -271,6 +352,27 @@ html,body{
         <div class="tab-text">我的</div>
     </div>
 </div>
+    <div id="urlPage" class="page">
+
+    <!-- 🌐 Icon + Title -->
+    <div class="url-icon">🌐</div>
+
+    <div class="url-title">網址檢查</div>
+    <div class="url-subtitle">驗證網站安全性</div>
+
+    <!-- 輸入區 -->
+    <div class="input-label">輸入網址</div>
+    <div class="confirm-btn">確認</div>
+
+    <!-- 輸入框 -->
+    <div class="input-box"></div>
+
+    <!-- 結果 -->
+    <div class="check-icon">✅</div>
+    <div class="check-text">本網站已確認為安全網站</div>
+
+</div>
+    
 
 <!-- ===== 網址檢查頁 ===== -->
 <div id="urlPage" class="page">
