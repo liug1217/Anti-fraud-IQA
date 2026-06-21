@@ -145,16 +145,40 @@ html, body{
 
 .page-header{
     position: absolute;
+    left: 0;
+    top: 0;
+
+    cursor: pointer;
+}
+
+/* Vector(返回箭頭,用 CSS 繪製,視覺上等同 Figma 的 Vector 路徑) */
+.back-arrow{
+    position: absolute;
     left: 20px;
+    top: 64px;
+    width: 10px;
+    height: 10px;
+
+    border-left: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+    transform: rotate(45deg);
+}
+
+/* 返回 */
+.back-text{
+    position: absolute;
+    width: 30px;
+    height: 18px;
+    left: 34px;
     top: 60px;
 
     font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 18px;
+    font-style: normal;
     font-weight: 700;
-    color: #fff;
-    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
-
-    cursor: pointer;
+    font-size: 15px;
+    line-height: 18px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .page-subtitle{
@@ -470,7 +494,10 @@ html, body{
 <!-- ===== 第二個框架:網址檢查頁(與首頁同色背景)===== -->
 <div class="page" id="urlPage">
 
-    <div class="page-header" onclick="closeUrlPage()">← 返回</div>
+    <div class="page-header" onclick="closeUrlPage()">
+        <div class="back-arrow"></div>
+        <div class="back-text">返回</div>
+    </div>
 
     <!-- Rectangle 7:全部內容都包在裡面 -->
     <div class="rect7">
@@ -568,3 +595,4 @@ document.addEventListener("DOMContentLoaded", function(){
 
 </body>
 </html>
+
