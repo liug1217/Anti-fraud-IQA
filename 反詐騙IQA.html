@@ -496,6 +496,12 @@ button{
 
     cursor: pointer;
     border: none;
+    transition: background 0.2s ease;
+}
+
+/* 已送出狀態:按鈕變紅色,文字顯示「清除」 */
+.rect9.cleared{
+    background: #E0413D;
 }
 
 /* 確認 */
@@ -590,9 +596,148 @@ button{
     color: #8C8C8C;
 }
 
+/* ===== 訊息分析:多行文字輸入框 ===== */
+.message-textarea{
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 122px;
+    height: 180px;
+    box-sizing: border-box;
+    padding: 16px 20px;
+    resize: none;
+
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    background: rgba(217, 217, 217, 0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(20px) saturate(160%) url(#liquidGlassRefract);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    box-shadow:
+        0px 4px 4px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -1px 6px rgba(0,0,0,0.12);
+    border-radius: 25px;
+    outline: none;
+}
+
+.message-textarea::placeholder{
+    color: #8C8C8C;
+    opacity: 1;
+}
+
+/* 電話查詢:國碼選單(預設台灣 +886,可切換) */
+.phone-country-code{
+    position: absolute;
+    left: 30px;
+    top: 122px;
+    height: 50px;
+    width: 100px;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.phone-country-code option{
+    color: #000000;
+}
+
+.phone-divider{
+    position: absolute;
+    left: 130px;
+    top: 136px;
+    width: 1px;
+    height: 22px;
+    background: rgba(255,255,255,0.3);
+}
+
+/* ===== 最新案例:列表卡片 ===== */
+.case-list{
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 20px;
+    bottom: 20px;
+    overflow-y: auto;
+}
+
+.case-item{
+    position: relative;
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 16px 20px;
+    box-sizing: border-box;
+
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(20px) saturate(160%) url(#liquidGlassRefract);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    box-shadow:
+        0px 4px 4px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -1px 6px rgba(0,0,0,0.12);
+    border-radius: 25px;
+}
+
+.case-tag{
+    display: inline-block;
+    padding: 3px 10px;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #FFFFFF;
+    background: #E0413D;
+    border-radius: 100px;
+}
+
+.case-title{
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 6px;
+}
+
+.case-desc{
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    color: #C9C9C9;
+    margin-bottom: 8px;
+}
+
+.case-date{
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    color: #8C8C8C;
+}
+
 /* 降低透明度偏好設定:自動退回純色背景,不套用玻璃效果 */
 @media (prefers-reduced-transparency: reduce){
-    .glass, .rect1, .rect7, .rect8{
+    .glass, .rect1, .rect7, .rect8, .message-textarea, .case-item, .profile-card, .profile-content-card{
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
         background: rgba(20, 20, 40, 0.9) !important;
@@ -627,13 +772,13 @@ button{
             <div class="text-sub" style="left:20px; top:140px; font-size:15px;">今天尚未發現高風險詐騙活動</div>
         </div>
 
-        <div class="rect3 glass">
+        <div class="rect3 glass" onclick="openMessagePage()">
             <div class="icon" style="left:20px; top:20px; font-size:50px;">💬</div>
             <div class="text-main" style="left:20px; top:115px; font-size:15px;">訊息分析</div>
             <div class="text-sub" style="left:20px; top:140px; font-size:10px;">檢查簡訊與聊天內容</div>
         </div>
 
-        <div class="rect4 glass">
+        <div class="rect4 glass" onclick="openPhonePage()">
             <div class="icon" style="left:20px; top:20px; font-size:50px;">📞</div>
             <div class="text-main" style="left:20px; top:115px; font-size:15px;">電話查詢</div>
             <div class="text-sub" style="left:20px; top:140px; font-size:10px;">識別可疑來電</div>
@@ -645,7 +790,7 @@ button{
             <div class="text-sub" style="left:20px; top:140px; font-size:10px;">驗證網站安全性</div>
         </div>
 
-        <div class="rect6 glass">
+        <div class="rect6 glass" onclick="openCasesPage()">
             <div class="icon" style="left:20px; top:20px; font-size:50px;">🚨</div>
             <div class="text-main" style="left:20px; top:115px; font-size:15px;">最新案例</div>
             <div class="text-sub" style="left:20px; top:140px; font-size:10px;">掌握詐騙趨勢</div>
@@ -683,8 +828,8 @@ button{
         <input class="url-input-label" id="urlInput" type="url" placeholder="輸入網址" inputmode="url" autocomplete="off" autocapitalize="off">
 
         <!-- Rectangle 9 -->
-        <button class="rect9" id="checkBtn" onclick="checkUrl()">
-            <span class="url-confirm-text">確認</span>
+        <button class="rect9" id="checkBtn" onclick="handleConfirmClick()">
+            <span class="url-confirm-text" id="confirmText">送出</span>
         </button>
 
         <!-- 格式錯誤提示 -->
@@ -694,6 +839,113 @@ button{
         <div class="url-result" id="urlResult">
             <div class="url-result-icon">✅</div>
             <div class="url-result-text">本網站已確認為安全網站</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===== 第四個框架:訊息分析(與其他框架同色背景)===== -->
+<div class="page" id="messagePage">
+
+    <div class="page-header" onclick="closeMessagePage()">
+        <div class="back-arrow"></div>
+        <div class="back-text">返回</div>
+    </div>
+
+    <div class="rect7">
+        <div class="url-icon">💬</div>
+        <div class="url-title">訊息分析</div>
+        <div class="url-subtitle">檢查簡訊與聊天內容</div>
+
+        <textarea class="message-textarea" id="messageInput" placeholder="貼上簡訊或對話內容..."></textarea>
+
+        <button class="rect9" id="messageCheckBtn" style="top:318px;" onclick="handleMessageConfirmClick()">
+            <span class="url-confirm-text" id="messageConfirmText">送出</span>
+        </button>
+
+        <div class="url-error" id="messageError" style="top:364px;"></div>
+
+        <div class="url-result" id="messageResult" style="top:318px;">
+            <div class="url-result-icon" id="messageResultIcon">✅</div>
+            <div class="url-result-text" id="messageResultText" style="width:240px;">內容看起來沒有明顯詐騙特徵</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===== 第五個框架:電話查詢(與其他框架同色背景)===== -->
+<div class="page" id="phonePage">
+
+    <div class="page-header" onclick="closePhonePage()">
+        <div class="back-arrow"></div>
+        <div class="back-text">返回</div>
+    </div>
+
+    <div class="rect7">
+        <div class="url-icon">📞</div>
+        <div class="url-title">電話查詢</div>
+        <div class="url-subtitle">識別可疑來電</div>
+
+        <div class="rect8"></div>
+        <select id="countryCodeSelect" class="phone-country-code">
+            <option value="+886">🇹🇼 +886</option>
+            <option value="+86">🇨🇳 +86</option>
+            <option value="+852">🇭🇰 +852</option>
+            <option value="+853">🇲🇴 +853</option>
+            <option value="+81">🇯🇵 +81</option>
+            <option value="+82">🇰🇷 +82</option>
+            <option value="+65">🇸🇬 +65</option>
+            <option value="+1">🇺🇸 +1</option>
+        </select>
+        <div class="phone-divider"></div>
+        <input class="url-input-label" id="phoneInput" type="tel" placeholder="輸入電話號碼" inputmode="tel" autocomplete="off" style="padding-left:150px;">
+
+        <button class="rect9" id="phoneCheckBtn" onclick="handlePhoneConfirmClick()">
+            <span class="url-confirm-text" id="phoneConfirmText">送出</span>
+        </button>
+
+        <div class="url-error" id="phoneError"></div>
+
+        <div class="url-result" id="phoneResult">
+            <div class="url-result-icon" id="phoneResultIcon">✅</div>
+            <div class="url-result-text" id="phoneResultText" style="width:240px;">此號碼目前沒有被檢舉紀錄</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===== 第六個框架:最新案例(與其他框架同色背景)===== -->
+<div class="page" id="casesPage">
+
+    <div class="page-header" onclick="closeCasesPage()">
+        <div class="back-arrow"></div>
+        <div class="back-text">返回</div>
+    </div>
+
+    <div class="rect7" style="height: 460px;">
+        <div class="url-icon">🚨</div>
+        <div class="url-title">最新案例</div>
+        <div class="url-subtitle">掌握詐騙趨勢</div>
+
+        <div class="case-list" style="top: 95px;">
+            <div class="case-item">
+                <div class="case-tag">假投資</div>
+                <div class="case-title">LINE 投資群組詐騙</div>
+                <div class="case-desc">假冒理財達人在 LINE 群組分享飆股訊號,誘導加入假投資平台,最終無法提款。</div>
+                <div class="case-date">2026/06/18</div>
+            </div>
+            <div class="case-item">
+                <div class="case-tag">假網拍</div>
+                <div class="case-title">低價演唱會門票詐騙</div>
+                <div class="case-desc">社群平台廣告販售超低價演唱會門票,要求私下轉帳,付款後即遭封鎖刪除好友。</div>
+                <div class="case-date">2026/06/15</div>
+            </div>
+            <div class="case-item">
+                <div class="case-tag">假徵才</div>
+                <div class="case-title">居家代發包裹工作詐騙</div>
+                <div class="case-desc">應徵者被要求先墊付包裹運費,並協助轉手不明物品,實為洗錢車手行為。</div>
+                <div class="case-date">2026/06/10</div>
+            </div>
         </div>
     </div>
 
@@ -744,6 +996,43 @@ function closeProfilePage(){
     document.getElementById("profilePage").style.display = "none";
 }
 
+function openMessagePage(){
+    document.getElementById("messagePage").style.display = "block";
+}
+
+function closeMessagePage(){
+    document.getElementById("messagePage").style.display = "none";
+    document.getElementById("messageResult").style.display = "none";
+    document.getElementById("messageError").style.display = "none";
+    const input = document.getElementById("messageInput");
+    input.value = "";
+    document.getElementById("messageConfirmText").textContent = "送出";
+    document.getElementById("messageCheckBtn").classList.remove("cleared");
+}
+
+function openPhonePage(){
+    document.getElementById("phonePage").style.display = "block";
+}
+
+function closePhonePage(){
+    document.getElementById("phonePage").style.display = "none";
+    document.getElementById("phoneResult").style.display = "none";
+    document.getElementById("phoneError").style.display = "none";
+    const input = document.getElementById("phoneInput");
+    input.value = "";
+    input.style.color = "#FFFFFF";
+    document.getElementById("phoneConfirmText").textContent = "送出";
+    document.getElementById("phoneCheckBtn").classList.remove("cleared");
+}
+
+function openCasesPage(){
+    document.getElementById("casesPage").style.display = "block";
+}
+
+function closeCasesPage(){
+    document.getElementById("casesPage").style.display = "none";
+}
+
 function closeUrlPage(){
     document.getElementById("urlPage").style.display = "none";
     document.getElementById("urlResult").style.display = "none";
@@ -751,6 +1040,8 @@ function closeUrlPage(){
     const input = document.getElementById("urlInput");
     input.value = "";
     input.style.color = "#FFFFFF";
+    document.getElementById("confirmText").textContent = "送出";
+    document.getElementById("checkBtn").classList.remove("cleared");
 }
 
 // 驗證是否為真實、格式正確的網址
@@ -789,11 +1080,39 @@ async function domainExists(hostname){
     return data && data.Status === 0 && Array.isArray(data.Answer) && data.Answer.length > 0;
 }
 
+// 按鈕點擊處理:依目前按鈕文字決定要「送出檢查」還是「清除內容」
+function handleConfirmClick(){
+    const confirmTextEl = document.getElementById("confirmText");
+
+    if(confirmTextEl.textContent === "清除"){
+        clearUrlCheck();
+    }else{
+        checkUrl();
+    }
+}
+
+// 清除輸入內容、結果與錯誤訊息,按鈕文字改回「送出」
+function clearUrlCheck(){
+    const input = document.getElementById("urlInput");
+    const errorEl = document.getElementById("urlError");
+    const resultEl = document.getElementById("urlResult");
+    const confirmTextEl = document.getElementById("confirmText");
+    const btn = document.getElementById("checkBtn");
+
+    input.value = "";
+    input.style.color = "#FFFFFF";
+    errorEl.style.display = "none";
+    resultEl.style.display = "none";
+    confirmTextEl.textContent = "送出";
+    btn.classList.remove("cleared");
+}
+
 async function checkUrl(){
     const input = document.getElementById("urlInput");
     const errorEl = document.getElementById("urlError");
     const resultEl = document.getElementById("urlResult");
     const btn = document.getElementById("checkBtn");
+    const confirmTextEl = document.getElementById("confirmText");
     const value = input.value.trim();
 
     if(!value){
@@ -807,6 +1126,8 @@ async function checkUrl(){
         errorEl.textContent = "請輸入正確的網址格式,例如 example.com";
         errorEl.style.display = "block";
         resultEl.style.display = "none";
+        confirmTextEl.textContent = "清除";
+        btn.classList.add("cleared");
         return;
     }
 
@@ -829,6 +1150,10 @@ async function checkUrl(){
             // 網域確實存在後,先用假資料模擬安全性檢查結果(之後可換成真實檢查邏輯)
             resultEl.style.display = "block";
         }
+
+        // 已經有送出過內容,按鈕文字改成「清除」並變紅色
+        confirmTextEl.textContent = "清除";
+        btn.classList.add("cleared");
     }catch(e){
         errorEl.textContent = "查詢失敗,請檢查網路連線後再試一次";
         errorEl.style.display = "block";
@@ -840,28 +1165,224 @@ async function checkUrl(){
     }
 }
 
+/* ===== 訊息分析:關鍵字規則模擬 ===== */
+const SCAM_KEYWORDS = [
+    "中獎", "解除分期", "解除設定", "貨到付款異常", "ATM 設定", "ATM設定",
+    "身分驗證", "點擊連結", "限時優惠", "投資老師", "保證獲利", "免費領取",
+    "客服將與您聯繫", "帳戶異常", "立即匯款", "私人賴", "加我LINE", "代墊款"
+];
+
+function handleMessageConfirmClick(){
+    const confirmTextEl = document.getElementById("messageConfirmText");
+    if(confirmTextEl.textContent === "清除"){
+        clearMessageCheck();
+    }else{
+        checkMessage();
+    }
+}
+
+function clearMessageCheck(){
+    const input = document.getElementById("messageInput");
+    const errorEl = document.getElementById("messageError");
+    const resultEl = document.getElementById("messageResult");
+    const confirmTextEl = document.getElementById("messageConfirmText");
+    const btn = document.getElementById("messageCheckBtn");
+
+    input.value = "";
+    errorEl.style.display = "none";
+    resultEl.style.display = "none";
+    confirmTextEl.textContent = "送出";
+    btn.classList.remove("cleared");
+}
+
+function checkMessage(){
+    const input = document.getElementById("messageInput");
+    const errorEl = document.getElementById("messageError");
+    const resultEl = document.getElementById("messageResult");
+    const resultIcon = document.getElementById("messageResultIcon");
+    const resultText = document.getElementById("messageResultText");
+    const confirmTextEl = document.getElementById("messageConfirmText");
+    const btn = document.getElementById("messageCheckBtn");
+
+    const value = input.value.trim();
+
+    if(!value){
+        errorEl.textContent = "請貼上要分析的簡訊或對話內容";
+        errorEl.style.display = "block";
+        resultEl.style.display = "none";
+        return;
+    }
+
+    // 規則模擬:比對是否包含常見詐騙關鍵字
+    const matched = SCAM_KEYWORDS.filter(function(keyword){
+        return value.includes(keyword);
+    });
+
+    errorEl.style.display = "none";
+
+    if(matched.length > 0){
+        resultIcon.textContent = "⚠️";
+        resultText.textContent = "偵測到可疑字眼:" + matched.join("、");
+    }else{
+        resultIcon.textContent = "✅";
+        resultText.textContent = "內容看起來沒有明顯詐騙特徵";
+    }
+
+    resultEl.style.display = "block";
+    confirmTextEl.textContent = "清除";
+    btn.classList.add("cleared");
+}
+
+/* ===== 電話查詢:假黑名單模擬 ===== */
+const SCAM_PHONE_NUMBERS = [
+    "0900123456", "0911222333", "0288776655", "0223456789"
+];
+
+function isValidPhoneFormat(value){
+    // 簡單格式驗證:台灣手機(09開頭10碼,或因為已有+886國碼前綴,省略開頭0打9開頭9碼也算合法)
+    // 市話(0開頭8-10碼,可含-)
+    const digitsOnly = value.replace(/[-\s]/g, "");
+    return /^09\d{8}$/.test(digitsOnly)
+        || /^9\d{8}$/.test(digitsOnly)
+        || /^0\d{1,2}\d{6,8}$/.test(digitsOnly);
+}
+
+// 統一補上開頭 0,方便跟黑名單清單比對
+function normalizePhoneNumber(digitsOnly){
+    if(/^9\d{8}$/.test(digitsOnly)){
+        return "0" + digitsOnly;
+    }
+    return digitsOnly;
+}
+
+function handlePhoneConfirmClick(){
+    const confirmTextEl = document.getElementById("phoneConfirmText");
+    if(confirmTextEl.textContent === "清除"){
+        clearPhoneCheck();
+    }else{
+        checkPhone();
+    }
+}
+
+function clearPhoneCheck(){
+    const input = document.getElementById("phoneInput");
+    const errorEl = document.getElementById("phoneError");
+    const resultEl = document.getElementById("phoneResult");
+    const confirmTextEl = document.getElementById("phoneConfirmText");
+    const btn = document.getElementById("phoneCheckBtn");
+
+    input.value = "";
+    input.style.color = "#FFFFFF";
+    errorEl.style.display = "none";
+    resultEl.style.display = "none";
+    confirmTextEl.textContent = "送出";
+    btn.classList.remove("cleared");
+}
+
+function checkPhone(){
+    const input = document.getElementById("phoneInput");
+    const errorEl = document.getElementById("phoneError");
+    const resultEl = document.getElementById("phoneResult");
+    const resultIcon = document.getElementById("phoneResultIcon");
+    const resultText = document.getElementById("phoneResultText");
+    const confirmTextEl = document.getElementById("phoneConfirmText");
+    const btn = document.getElementById("phoneCheckBtn");
+    const countryCode = document.getElementById("countryCodeSelect").value;
+
+    const value = input.value.trim();
+
+    if(!value){
+        errorEl.textContent = "請輸入電話號碼";
+        errorEl.style.display = "block";
+        resultEl.style.display = "none";
+        return;
+    }
+
+    const digitsRaw = value.replace(/[-\s]/g, "");
+
+    // 台灣號碼用專屬格式驗證;其他國碼用通用的位數檢查(6-15碼)
+    const isValid = (countryCode === "+886")
+        ? isValidPhoneFormat(value)
+        : /^\d{6,15}$/.test(digitsRaw);
+
+    if(!isValid){
+        errorEl.textContent = "請輸入正確的電話號碼格式";
+        errorEl.style.display = "block";
+        resultEl.style.display = "none";
+        confirmTextEl.textContent = "清除";
+        btn.classList.add("cleared");
+        return;
+    }
+
+    const digitsOnly = (countryCode === "+886") ? normalizePhoneNumber(digitsRaw) : digitsRaw;
+
+    errorEl.style.display = "none";
+
+    if(countryCode === "+886" && SCAM_PHONE_NUMBERS.includes(digitsOnly)){
+        resultIcon.textContent = "⚠️";
+        resultText.textContent = "此號碼被多次檢舉為詐騙電話";
+    }else{
+        resultIcon.textContent = "✅";
+        resultText.textContent = "此號碼目前沒有被檢舉紀錄";
+    }
+
+    resultEl.style.display = "block";
+    confirmTextEl.textContent = "清除";
+    btn.classList.add("cleared");
+}
+
 document.addEventListener("DOMContentLoaded", function(){
-    const input = document.getElementById("urlInput");
-    if(input){
-        input.addEventListener("input", function(){
-            document.getElementById("urlError").style.display = "none";
-            input.style.color = "#FFFFFF";
-        });
 
-        // 防止手機鍵盤跳出時,瀏覽器自動把畫面往上捲動
-        function resetScroll(){
-            window.scrollTo(0, 0);
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
+    // 防止手機鍵盤跳出時,瀏覽器自動把畫面往上捲動
+    function resetScroll(){
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
 
-        input.addEventListener("focus", function(){
+    function attachFocusScrollFix(el){
+        if(!el) return;
+        el.addEventListener("focus", function(){
             resetScroll();
             setTimeout(resetScroll, 50);
             setTimeout(resetScroll, 300);
         });
+        el.addEventListener("blur", resetScroll);
+    }
 
-        input.addEventListener("blur", resetScroll);
+    const input = document.getElementById("urlInput");
+    if(input){
+        input.addEventListener("input", function(){
+            document.getElementById("urlError").style.display = "none";
+            document.getElementById("urlResult").style.display = "none";
+            document.getElementById("confirmText").textContent = "送出";
+            document.getElementById("checkBtn").classList.remove("cleared");
+            input.style.color = "#FFFFFF";
+        });
+        attachFocusScrollFix(input);
+    }
+
+    const messageInput = document.getElementById("messageInput");
+    if(messageInput){
+        messageInput.addEventListener("input", function(){
+            document.getElementById("messageError").style.display = "none";
+            document.getElementById("messageResult").style.display = "none";
+            document.getElementById("messageConfirmText").textContent = "送出";
+            document.getElementById("messageCheckBtn").classList.remove("cleared");
+        });
+        attachFocusScrollFix(messageInput);
+    }
+
+    const phoneInput = document.getElementById("phoneInput");
+    if(phoneInput){
+        phoneInput.addEventListener("input", function(){
+            document.getElementById("phoneError").style.display = "none";
+            document.getElementById("phoneResult").style.display = "none";
+            document.getElementById("phoneConfirmText").textContent = "送出";
+            document.getElementById("phoneCheckBtn").classList.remove("cleared");
+            phoneInput.style.color = "#FFFFFF";
+        });
+        attachFocusScrollFix(phoneInput);
     }
 
     // 頭像上傳:選擇圖片後讀取並顯示在頭像圓框裡
