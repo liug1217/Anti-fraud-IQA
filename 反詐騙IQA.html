@@ -1328,8 +1328,6 @@ function closeCasesPage(){
 /* ===== AI 對話頁(沿用原本機器人的單一回覆框風格,不用打字機動畫)===== */
 function openAiPage(){
     document.getElementById("aiPage").style.display = "block";
-    // 提前在背景開始下載模型,減少使用者真正送出訊息時的等待感
-    loadAiModel().catch(function(){ /* 失敗時交給 sendChatMessage 的 try/catch 處理 */ });
 }
 
 function closeAiPage(){
@@ -1452,60 +1450,25 @@ function generateRuleBasedReply(message){
     return null;
 }
 
-/* ===== 瀏覽器內開源 AI 模型(Transformers.js + Qwen2.5-0.5B-Instruct)===== */
-let aiPipelinePromise = null;
-let aiModelLoading = false;
-
-async function loadAiModel(onProgress){
-    if(aiPipelinePromise) return aiPipelinePromise;
-
-    aiPipelinePromise = (async function(){
-        const { pipeline } = await import("https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2");
-        return await pipeline(
-            "text-generation",
-            "Xenova/Qwen2.5-0.5B-Instruct",
-            {
-                progress_callback: function(p){
-                    if(onProgress && p && p.status === "progress"){
-                        onProgress(Math.round(p.progress || 0));
-                    }
-                }
-            }
-        );
-    })();
-
-    return aiPipelinePromise;
-}
-
+/* ===== 呼叫後端 AI API(Vercel Node.js Serverless Function:/api/chat)===== */
 async function generateAiModelReply(message){
-    const generator = await loadAiModel();
-
-    const messages = [
-        {
-            role: "system",
-            content: "你是「反詐騙IQA」App 裡的智能小助手,用簡短的繁體中文回覆(2-3句話以內)。不要對特定網址、電話號碼或具體個案直接斷定「安全」或「是詐騙」,只給通用的防詐騙建議與觀念,並可以建議使用者使用 App 裡的網址檢查、訊息分析、電話查詢功能做進一步確認。"
-        },
-        { role: "user", content: message }
-    ];
-
-    const output = await generator(messages, {
-        max_new_tokens: 150,
-        temperature: 0.7,
-        do_sample: true
+    const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: message })
     });
 
-    let reply = "";
-    if(Array.isArray(output) && output[0]){
-        const generated = output[0].generated_text;
-        if(Array.isArray(generated)){
-            const last = generated[generated.length - 1];
-            reply = (last && last.content) ? last.content : "";
-        }else if(typeof generated === "string"){
-            reply = generated;
-        }
+    if(!response.ok){
+        throw new Error("AI 服務呼叫失敗(狀態碼 " + response.status + ")");
     }
 
-    return reply.trim() || "不好意思,我目前沒辦法理解這個問題,建議您使用「訊息分析」「電話查詢」或「網址檢查」功能做進一步確認。";
+    const data = await response.json();
+
+    if(!data || !data.reply){
+        throw new Error("AI 服務沒有回傳內容");
+    }
+
+    return data.reply;
 }
 
 async function sendChatMessage(){
@@ -1527,14 +1490,14 @@ async function sendChatMessage(){
         return;
     }
 
-    // 沒命中規則,交給瀏覽器內的開源模型回覆
-    replyText.innerHTML = "🤖 思考中...(若是第一次使用需要先下載模型,請稍候)";
+    // 沒命中規則,交給後端 AI API 回覆
+    replyText.innerHTML = "🤖 思考中...";
 
     try{
         const reply = await generateAiModelReply(message);
         replyText.textContent = reply;
     }catch(e){
-        replyText.textContent = "目前無法載入 AI 模型(可能是網路問題),建議您使用「訊息分析」「電話查詢」或「網址檢查」功能。";
+        replyText.textContent = "目前無法連線 AI 服務(可能是網路問題),建議您使用「訊息分析」「電話查詢」或「網址檢查」功能。";
     }
 }
 
