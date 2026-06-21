@@ -39,6 +39,19 @@ html, body{
 /* ===== 字體 ===== */
 *{
     font-family: "SF Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+input, textarea{
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+button{
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 /* ===== 上移容器 ===== */
@@ -77,7 +90,7 @@ html, body{
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     border: 1px solid rgba(255,255,255,0.18);
     box-shadow:
-        0px 4px 12px rgba(0,0,0,0.25),
+        0px 4px 4px rgba(0,0,0,0.25),
         inset 0 1px 0 rgba(255,255,255,0.35),
         inset 0 -1px 6px rgba(0,0,0,0.12);
 }
@@ -89,13 +102,13 @@ html, body{
 .rect5{ left: 20px; top: 553px; width: calc(50% - 30px); height: 170px; }
 .rect6{ right: 20px; top: 553px; width: calc(50% - 30px); height: 170px; }
 
-/* ===== Bottom Nav(液態玻璃)===== */
+/* ===== Bottom Nav(液態玻璃,Rectangle 1)===== */
 .rect1{
     position: absolute;
     left: 20px;
     right: 20px;
     bottom: 20px;
-    height: 90px;
+    height: 100px;
 
     background: rgba(255,255,255,0.1);
     border-radius: 50px;
@@ -105,26 +118,162 @@ html, body{
 
     border: 1px solid rgba(255,255,255,0.18);
 
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
     box-shadow:
         0px 4px 4px rgba(0,0,0,0.25),
         inset 0 1px 0 rgba(255,255,255,0.35),
         inset 0 -1px 6px rgba(0,0,0,0.12);
 }
 
+/* Frame 1:導覽列裡的圖示/文字群組,精確絕對定位(left:39px, top:31px 相對於 Rectangle 1) */
+.nav-frame{
+    position: absolute;
+    left: 39px;
+    top: 31px;
+    width: 320px;
+    height: 45.5px;
+}
+
 .tab{
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     color: white;
 }
 
-.tab-icon{ font-size: 18px; }
-.tab-text{ font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 12px; margin-top: 4px; }
+.tab-icon{
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+}
+
+.tab-text{
+    margin-top: 7px;
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+}
+
+/* Group 1:首頁 */
+.tab-home{ left: 0px; top: 0px; width: 30px; }
+
+/* Group 2:AI */
+.tab-ai{ left: 96px; top: 0px; width: 23px; }
+
+/* Group 3:掃描 */
+.tab-scan{ left: 191px; top: 0px; width: 30px; }
+
+/* Group 4:我的(含頭像圓形圖示) */
+.tab-profile{ left: 285px; top: 2.5px; width: 30px; cursor: pointer; }
+.tab-profile .tab-icon{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8a8a8a, #4a4a4a);
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    font-size: 0;
+}
+
+/* 「我的」頁面標題 */
+.profile-page-title{
+    position: absolute;
+    left: 20px;
+    top: 60px;
+    width: 60px;
+    height: 36px;
+
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-style: normal;
+    font-weight: 1000;
+    font-size: 30px;
+    line-height: 36px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* 右上角設定圖示 */
+.settings-btn{
+    position: absolute;
+    right: 20px;
+    top: 76px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.settings-icon-ring{
+    position: absolute;
+    left: 4.17%;
+    right: 4.17%;
+    top: 4.17%;
+    bottom: 4.17%;
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+/* Rectangle 10:個人資料卡片(液態玻璃) */
+.profile-card{
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 116px;
+    height: 140px;
+
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(20px) saturate(160%) url(#liquidGlassRefract);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    box-shadow:
+        0px 4px 4px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -1px 6px rgba(0,0,0,0.12);
+    border-radius: 40px;
+}
+
+/* 頭像照片 */
+.profile-photo{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+
+    background: linear-gradient(135deg, #8a8a8a, #4a4a4a);
+    background-size: cover;
+    background-position: center;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* 姓名 */
+.profile-name{
+    position: absolute;
+    left: 140px;
+    top: 20px;
+    width: 66px;
+    height: 24px;
+
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+}
 
 /* ===== Page(第二個框架,沿用首頁同色背景)===== */
 .page{
@@ -166,6 +315,7 @@ html, body{
     border-left: 2px solid #FFFFFF;
     border-bottom: 2px solid #FFFFFF;
     transform: rotate(45deg);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 /* 返回 */
@@ -279,7 +429,7 @@ html, body{
     box-shadow:
         0px 4px 4px rgba(0, 0, 0, 0.25),
         inset 0 1px 0 rgba(255,255,255,0.35),
-        inset 0 -1px 4px rgba(0,0,0,0.12);
+        inset 0 -1px 6px rgba(0,0,0,0.12);
     border-radius: 25px;
 }
 
@@ -359,6 +509,7 @@ html, body{
     font-size: 30px;
     line-height: 36px;
     color: #000000;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 /* 本網站已確認為安全網站 */
@@ -487,10 +638,12 @@ html, body{
     </div>
 
     <div class="rect1">
-        <div class="tab"><div class="tab-icon">🏠</div><div class="tab-text">首頁</div></div>
-        <div class="tab"><div class="tab-icon">🤖</div><div class="tab-text">AI</div></div>
-        <div class="tab"><div class="tab-icon">📷</div><div class="tab-text">掃描</div></div>
-        <div class="tab"><div class="tab-icon">👤</div><div class="tab-text">我的</div></div>
+        <div class="nav-frame">
+            <div class="tab tab-home"><div class="tab-icon">🏠</div><div class="tab-text">首頁</div></div>
+            <div class="tab tab-ai"><div class="tab-icon">🤖</div><div class="tab-text">AI</div></div>
+            <div class="tab tab-scan"><div class="tab-icon">📷</div><div class="tab-text">掃描</div></div>
+            <div class="tab tab-profile" onclick="openProfilePage()"><div class="tab-icon nav-avatar-icon"></div><div class="tab-text">我的</div></div>
+        </div>
     </div>
 
 </div>
@@ -530,9 +683,46 @@ html, body{
 
 </div>
 
+<!-- ===== 第三個框架:我的(與其他框架同色背景)===== -->
+<div class="page" id="profilePage">
+
+    <div class="profile-page-title">我的</div>
+
+    <div class="settings-btn">
+        <div class="settings-icon-ring"></div>
+    </div>
+
+    <!-- Rectangle 10:個人資料卡片 -->
+    <div class="profile-card">
+        <div class="profile-photo" id="profilePhoto" onclick="document.getElementById('avatarInput').click()"></div>
+        <input type="file" id="avatarInput" accept="image/*" style="display:none">
+        <div class="profile-name">劉 Ｏ 佑</div>
+        <div style="position:absolute; left:140px; top:54px; width:195px; height:18px; font-family:'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif; font-style:normal; font-weight:510; font-size:15px; line-height:18px; color:#8C8C8C;">帳號與設定</div>
+    </div>
+
+    <!-- 底部導覽列(跟首頁同一個 Rectangle 1 + Frame 1)-->
+    <div class="rect1">
+        <div class="nav-frame">
+            <div class="tab tab-home" onclick="closeProfilePage()" style="cursor:pointer;"><div class="tab-icon">🏠</div><div class="tab-text">首頁</div></div>
+            <div class="tab tab-ai"><div class="tab-icon">🤖</div><div class="tab-text">AI</div></div>
+            <div class="tab tab-scan"><div class="tab-icon">📷</div><div class="tab-text">掃描</div></div>
+            <div class="tab tab-profile"><div class="tab-icon nav-avatar-icon"></div><div class="tab-text">我的</div></div>
+        </div>
+    </div>
+
+</div>
+
 <script>
 function openUrlPage(){
     document.getElementById("urlPage").style.display = "block";
+}
+
+function openProfilePage(){
+    document.getElementById("profilePage").style.display = "block";
+}
+
+function closeProfilePage(){
+    document.getElementById("profilePage").style.display = "none";
 }
 
 function closeUrlPage(){
@@ -606,7 +796,7 @@ async function checkUrl(){
     // 查詢中:暫時鎖住按鈕,避免重複點擊
     errorEl.style.display = "none";
     resultEl.style.display = "none";
-    btn.style.opacity = "0.6";
+    btn.style.opacity = "1";
     btn.disabled = true;
 
     try{
@@ -653,6 +843,28 @@ document.addEventListener("DOMContentLoaded", function(){
         });
 
         input.addEventListener("blur", resetScroll);
+    }
+
+    // 頭像上傳:選擇圖片後讀取並顯示在頭像圓框裡
+    const avatarInput = document.getElementById("avatarInput");
+    const profilePhoto = document.getElementById("profilePhoto");
+    if(avatarInput && profilePhoto){
+        avatarInput.addEventListener("change", function(){
+            const file = avatarInput.files && avatarInput.files[0];
+            if(!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e){
+                const imgCss = "url('" + e.target.result + "') center/cover no-repeat";
+                profilePhoto.style.background = imgCss;
+
+                // 同步更新底部導覽列「我的」圖示(首頁跟我的頁面各有一份)
+                document.querySelectorAll(".nav-avatar-icon").forEach(function(icon){
+                    icon.style.background = imgCss;
+                });
+            };
+            reader.readAsDataURL(file);
+        });
     }
 });
 </script>
