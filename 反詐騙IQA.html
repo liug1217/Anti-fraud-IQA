@@ -1280,6 +1280,8 @@ function closeCasesPage(){
 /* ===== AI 對話頁 ===== */
 function openAiPage(){
     document.getElementById("aiPage").style.display = "block";
+    // 提前在背景開始下載模型,減少使用者真正送出訊息時的等待感
+    loadAiModel().catch(function(){ /* 失敗時交給 sendChatMessage 的 try/catch 處理 */ });
 }
 
 function closeAiPage(){
@@ -1301,10 +1303,11 @@ function appendChatBubble(text, sender){
 }
 
 // 規則式假回覆,之後可以換成真正的 AI API
-function generateAiReply(message){
+// 第一層:規則比對(命中關鍵字就直接導去對應功能,不交給 AI 自由發揮判斷)
+function generateRuleBasedReply(message){
     const msg = message.toLowerCase();
 
-    if(message.includes("網址") || msg.includes("http") || msg.includes("連結")){
+    if(message.includes("網址") || msg.includes("http") || message.includes("連結")){
         return "如果您收到可疑的網址,建議直接使用「網址檢查」功能確認真偽。要幫您打開嗎?<br><span style=\"text-decoration:underline; cursor:pointer;\" onclick=\"closeAiPage(); openUrlPage();\">前往網址檢查 →</span>";
     }
 
@@ -1324,10 +1327,67 @@ function generateAiReply(message){
         return "您好!我是反詐騙IQA智能小助手,有任何可疑的訊息、來電或網址都可以告訴我喔!";
     }
 
-    return "目前我還在學習中,建議您可以使用「訊息分析」「電話查詢」或「網址檢查」功能,我會持續為您比對最新的詐騙資訊。";
+    // 沒有命中關鍵字,回傳 null,交給開源 AI 模型自由對話
+    return null;
 }
 
-function sendChatMessage(){
+/* ===== 瀏覽器內開源 AI 模型(Transformers.js + Qwen2.5-0.5B-Instruct)===== */
+let aiPipelinePromise = null;
+let aiModelLoading = false;
+
+async function loadAiModel(onProgress){
+    if(aiPipelinePromise) return aiPipelinePromise;
+
+    aiPipelinePromise = (async function(){
+        const { pipeline } = await import("https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2");
+        return await pipeline(
+            "text-generation",
+            "Xenova/Qwen2.5-0.5B-Instruct",
+            {
+                progress_callback: function(p){
+                    if(onProgress && p && p.status === "progress"){
+                        onProgress(Math.round(p.progress || 0));
+                    }
+                }
+            }
+        );
+    })();
+
+    return aiPipelinePromise;
+}
+
+async function generateAiModelReply(message){
+    const generator = await loadAiModel();
+
+    const messages = [
+        {
+            role: "system",
+            content: "你是「反詐騙IQA」App 裡的智能小助手,用簡短的繁體中文回覆(2-3句話以內)。不要對特定網址、電話號碼或具體個案直接斷定「安全」或「是詐騙」,只給通用的防詐騙建議與觀念,並可以建議使用者使用 App 裡的網址檢查、訊息分析、電話查詢功能做進一步確認。"
+        },
+        { role: "user", content: message }
+    ];
+
+    const output = await generator(messages, {
+        max_new_tokens: 150,
+        temperature: 0.7,
+        do_sample: true
+    });
+
+    let reply = "";
+    if(Array.isArray(output) && output[0]){
+        const generated = output[0].generated_text;
+        if(Array.isArray(generated)){
+            const last = generated[generated.length - 1];
+            reply = (last && last.content) ? last.content : "";
+        }else if(typeof generated === "string"){
+            reply = generated;
+        }
+    }
+
+    return reply.trim() || "不好意思,我目前沒辦法理解這個問題,建議您使用「訊息分析」「電話查詢」或「網址檢查」功能做進一步確認。";
+}
+
+async function sendChatMessage(){
     const input = document.getElementById("chatInput");
     const message = input.value.trim();
     if(!message) return;
@@ -1337,9 +1397,31 @@ function sendChatMessage(){
 
     document.getElementById("chatQuickReplies").style.display = "none";
 
-    setTimeout(function(){
-        appendChatBubble(generateAiReply(message), "ai");
-    }, 400);
+    const ruleReply = generateRuleBasedReply(message);
+
+    if(ruleReply){
+        setTimeout(function(){
+            appendChatBubble(ruleReply, "ai");
+        }, 400);
+        return;
+    }
+
+    // 沒命中規則,交給瀏覽器內的開源模型回覆
+    const loadingBubbleId = "loading-" + Date.now();
+    appendChatBubble(
+        "<span id=\"" + loadingBubbleId + "\">🤖 思考中...(若是第一次使用需要先下載模型,請稍候)</span>",
+        "ai"
+    );
+
+    try{
+        const reply = await generateAiModelReply(message);
+        const bubbleEl = document.getElementById(loadingBubbleId);
+        if(bubbleEl) bubbleEl.parentElement.innerHTML = reply;
+    }catch(e){
+        const bubbleEl = document.getElementById(loadingBubbleId);
+        const fallback = "目前無法載入 AI 模型(可能是網路問題),建議您使用「訊息分析」「電話查詢」或「網址檢查」功能。";
+        if(bubbleEl) bubbleEl.parentElement.innerHTML = fallback;
+    }
 }
 
 function sendQuickReply(text){
