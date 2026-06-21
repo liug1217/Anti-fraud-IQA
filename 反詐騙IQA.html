@@ -735,84 +735,98 @@ button{
     color: #8C8C8C;
 }
 
-/* ===== AI 對話頁 ===== */
-.chat-container{
+/* ===== AI 對話頁(沿用原本機器人的單一回覆框風格)===== */
+
+/* 使用者剛剛輸入的內容,顯示成一個小標籤 */
+.ai-user-tag{
     position: absolute;
-    left: 0;
-    top: 110px;
-    right: 0;
-    bottom: 110px;
-    overflow-y: auto;
-    padding: 0 20px;
+    left: 20px;
+    right: 20px;
+    top: 100px;
+    display: none;
+    width: fit-content;
+    max-width: calc(100% - 40px);
+    padding: 8px 16px;
     box-sizing: border-box;
-}
 
-.chat-bubble-row{
-    display: flex;
-    margin-bottom: 14px;
-}
-
-.chat-bubble-row.user{ justify-content: flex-end; }
-.chat-bubble-row.ai{ justify-content: flex-start; }
-
-.chat-bubble{
-    max-width: 78%;
-    padding: 12px 16px;
-    border-radius: 20px;
-
-    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 14px;
-    line-height: 20px;
-    color: #FFFFFF;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    word-break: break-word;
-}
-
-.chat-bubble-row.user .chat-bubble{
-    background: #2949CB;
-    border-bottom-right-radius: 6px;
-}
-
-.chat-bubble-row.ai .chat-bubble{
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.18);
-    backdrop-filter: blur(20px) saturate(160%) url(#liquidGlassRefract);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border-bottom-left-radius: 6px;
-}
-
-.chat-quick-replies{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 0 20px 14px;
-}
-
-.chat-quick-chip{
-    padding: 8px 14px;
+    background: rgba(255,255,255,0.15);
     border-radius: 100px;
-
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.25);
 
     font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 13px;
     color: #FFFFFF;
-    cursor: pointer;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    word-break: break-word;
 }
 
-.chat-input-bar{
+/* AI/規則回覆顯示區 */
+.ai-reply-area{
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 150px;
+    bottom: 100px;
+    overflow-y: auto;
+}
+
+.ai-reply-text{
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    line-height: 26px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    word-break: break-word;
+}
+
+/* 即時時鐘小卡片(目前規則沒有觸發,預留) */
+.ai-time-widget{
+    display: none;
+    width: 200px;
+    height: 80px;
+    margin-top: 16px;
+    align-items: center;
+    justify-content: center;
+
+    background: #000000;
+    border-radius: 15px;
+}
+
+.ai-time-text{
+    color: #FFFFFF;
+    font-size: 32px;
+    font-weight: 400;
+}
+
+/* 「+」附加選單面板(裝飾用,沒有實際功能) */
+.ai-attach-panel{
+    position: absolute;
+    left: 20px;
+    bottom: 90px;
+    width: 160px;
+    height: 120px;
+    display: none;
+
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(20px) saturate(160%) url(#liquidGlassRefract);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    border-radius: 15px;
+}
+
+/* 底部輸入列 */
+.ai-input-bar{
     position: absolute;
     left: 20px;
     right: 20px;
     bottom: 20px;
     height: 56px;
     box-sizing: border-box;
-    padding: 0 8px 0 20px;
+    padding: 0 8px 0 14px;
 
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 
     background: rgba(255,255,255,0.1);
     border: 1px solid rgba(255,255,255,0.18);
@@ -825,7 +839,26 @@ button{
     border-radius: 100px;
 }
 
-.chat-input{
+.ai-plus-btn, .ai-mic-btn{
+    position: relative;
+    width: 32px;
+    height: 32px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.ai-plus-dot, .ai-mic-dot{
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    display: none;
+}
+
+.ai-text-input{
     flex: 1;
     min-width: 0;
     background: transparent;
@@ -837,13 +870,13 @@ button{
     color: #FFFFFF;
 }
 
-.chat-input::placeholder{
+.ai-text-input::placeholder{
     color: #8C8C8C;
 }
 
-.chat-send-btn{
-    width: 40px;
-    height: 40px;
+.ai-send-btn{
+    width: 36px;
+    height: 36px;
     flex: none;
     border-radius: 50%;
     background: #2949CB;
@@ -853,8 +886,6 @@ button{
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    color: #FFFFFF;
 }
 
 /* ===== 掃描頁 ===== */
@@ -1152,21 +1183,38 @@ button{
         <div class="back-text">返回</div>
     </div>
 
-    <div class="chat-container" id="chatContainer">
-        <div class="chat-bubble-row ai">
-            <div class="chat-bubble">您好,我是反詐騙IQA智能小助手 🤖<br>有任何可疑的訊息、電話或網址,都可以直接告訴我,我會協助您判斷!</div>
+    <div class="ai-user-tag" id="aiUserTag"></div>
+
+    <div class="ai-reply-area">
+        <div class="ai-time-widget" id="aiTimeWidget">
+            <div class="ai-time-text" id="aiTimeText">00:00:00</div>
         </div>
+        <div class="ai-reply-text" id="aiReplyText">您好,我是反詐騙IQA智能小助手 🤖 有任何可疑的訊息、電話或網址,都可以直接告訴我!</div>
     </div>
 
-    <div class="chat-quick-replies" id="chatQuickReplies">
-        <div class="chat-quick-chip" onclick="sendQuickReply('這個網址安全嗎?')">這個網址安全嗎?</div>
-        <div class="chat-quick-chip" onclick="sendQuickReply('教我辨識詐騙簡訊')">教我辨識詐騙簡訊</div>
-        <div class="chat-quick-chip" onclick="sendQuickReply('這支電話是詐騙嗎?')">這支電話是詐騙嗎?</div>
-    </div>
+    <div class="ai-attach-panel" id="aiAttachPanel"></div>
 
-    <div class="chat-input-bar">
-        <input type="text" class="chat-input" id="chatInput" placeholder="輸入訊息..." autocomplete="off">
-        <button class="chat-send-btn" onclick="sendChatMessage()">➤</button>
+    <div class="ai-input-bar" id="aiInputBar">
+        <div class="ai-plus-btn" id="aiPlusBtn" onclick="toggleAiAttachPanel()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M11 13H5V11H11V5H13V11H19V13H13V19H11V13Z" fill="#FFFFFF"/></svg>
+            <div class="ai-plus-dot" id="aiPlusDot"></div>
+        </div>
+
+        <input type="text" class="ai-text-input" id="chatInput" placeholder="想問就問" autocomplete="off">
+
+        <div class="ai-mic-btn" id="aiMicBtn" onclick="toggleAiMicHighlight()">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 10C9.10457 10 10 9.10457 10 8V3.33333C10 2.22876 9.10457 1.33333 8 1.33333C6.89543 1.33333 6 2.22876 6 3.33333V8C6 9.10457 6.89543 10 8 10Z" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M12.6667 8C12.6667 10.9455 10.9455 13.3333 8 13.3333C5.05448 13.3333 3.33333 10.9455 3.33333 8" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M8 13.3333V15.3333" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M5.33333 15.3333H10.6667" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <div class="ai-mic-dot" id="aiMicDot"></div>
+        </div>
+
+        <button class="ai-send-btn" id="aiSendBtn" onclick="sendChatMessage()">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 18V6" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M7 11l5-5 5 5" stroke="#fff" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
+        </button>
     </div>
 
 </div>
@@ -1277,7 +1325,7 @@ function closeCasesPage(){
     document.getElementById("casesPage").style.display = "none";
 }
 
-/* ===== AI 對話頁 ===== */
+/* ===== AI 對話頁(沿用原本機器人的單一回覆框風格,不用打字機動畫)===== */
 function openAiPage(){
     document.getElementById("aiPage").style.display = "block";
     // 提前在背景開始下載模型,減少使用者真正送出訊息時的等待感
@@ -1288,21 +1336,6 @@ function closeAiPage(){
     document.getElementById("aiPage").style.display = "none";
 }
 
-function appendChatBubble(text, sender){
-    const container = document.getElementById("chatContainer");
-    const row = document.createElement("div");
-    row.className = "chat-bubble-row " + sender;
-
-    const bubble = document.createElement("div");
-    bubble.className = "chat-bubble";
-    bubble.innerHTML = text;
-
-    row.appendChild(bubble);
-    container.appendChild(row);
-    container.scrollTop = container.scrollHeight;
-}
-
-// 規則式假回覆,之後可以換成真正的 AI API
 // 第一層:規則比對(命中關鍵字就直接導去對應功能,不交給 AI 自由發揮判斷)
 function generateRuleBasedReply(message){
     const msg = message.toLowerCase();
@@ -1323,8 +1356,96 @@ function generateRuleBasedReply(message){
         return "不客氣!保護自己最好的方式就是多一分懷疑、多一次確認 😊";
     }
 
-    if(message.includes("你好") || message.includes("哈囉") || message.includes("嗨")){
-        return "您好!我是反詐騙IQA智能小助手,有任何可疑的訊息、來電或網址都可以告訴我喔!";
+    if(message.includes("你好") || message.includes("哈囉") || message.includes("哈啰") || message.includes("嗨")){
+        const base = ["哈囉", "你好"];
+        const pick = base[Math.floor(Math.random() * base.length)];
+
+        let wordTail = "";
+        if(pick === "你好" && Math.random() < 0.7){
+            const tails = ["呀", "啊"];
+            wordTail = tails[Math.floor(Math.random() * tails.length)];
+        }
+
+        let symbol = "";
+        if(Math.random() < 0.7){
+            const symbols = ["～", "!", "✨"];
+            symbol = symbols[Math.floor(Math.random() * symbols.length)];
+        }
+        if(symbol === "～" && Math.random() < 0.7){
+            symbol += "👋";
+        }
+
+        return pick + wordTail + symbol + " 我是反詐騙IQA智能小助手,有任何可疑的訊息、來電或網址都可以告訴我喔!";
+    }
+
+    // 在嗎
+    if(message === "在嗎" || message === "欸"){
+        const base = ["在呀", "怎麼了", "我在", "說吧"];
+        const pick = base[Math.floor(Math.random() * base.length)];
+
+        let wordTail = "";
+        if(pick === "在呀" && Math.random() < 0.7){
+            const tails = ["呀", "啊"];
+            wordTail = tails[Math.floor(Math.random() * tails.length)];
+        }
+
+        return pick + wordTail;
+    }
+
+    // 幹嘛
+    if(message === "幹嘛" || message === "在幹嘛"){
+        const base = ["在幫大家防詐騙", "在等你來問問題", "沒事,在待命中"];
+        return base[Math.floor(Math.random() * base.length)];
+    }
+
+    // 現在幾點
+    if(((message.includes("現在") || message.includes("今天")) && message.includes("幾點")) || message === "幾點"){
+        const now = new Date();
+        const hour = now.getHours();
+        const minute = now.getMinutes().toString().padStart(2, "0");
+
+        const base = [
+            `現在${hour}:${minute}`,
+            `現在是${hour}:${minute}`,
+            `${hour}點${minute}分`
+        ];
+        const pick = base[Math.floor(Math.random() * base.length)];
+
+        let symbol = "";
+        if(Math.random() < 0.9){
+            const symbols = ["～", "!", "🕒"];
+            symbol = symbols[Math.floor(Math.random() * symbols.length)];
+        }
+
+        return pick + symbol;
+    }
+
+    // 今天日期
+    if(message.includes("今天") && (message.includes("幾月") || message.includes("幾日") || message.includes("日期") || message.includes("幾號"))){
+        const now = new Date();
+        const month = now.getMonth() + 1;
+        const date = now.getDate();
+
+        const base = [
+            `今天${month}月${date}日`,
+            `今天是${month}月${date}日`,
+            `${month}月${date}日`
+        ];
+        const pick = base[Math.floor(Math.random() * base.length)];
+
+        let symbol = "";
+        if(Math.random() < 0.9){
+            const symbols = ["～", "!", "📅"];
+            symbol = symbols[Math.floor(Math.random() * symbols.length)];
+        }
+
+        return pick + symbol;
+    }
+
+    // 天氣(簡單閒聊,沒有接真實天氣資料)
+    if(message.includes("今天天氣")){
+        const base = ["是的呀～", "對啊!", "希望是好天氣 ☀️"];
+        return base[Math.floor(Math.random() * base.length)];
     }
 
     // 沒有命中關鍵字,回傳 null,交給開源 AI 模型自由對話
@@ -1392,42 +1513,46 @@ async function sendChatMessage(){
     const message = input.value.trim();
     if(!message) return;
 
-    appendChatBubble(message, "user");
-    input.value = "";
+    const userTag = document.getElementById("aiUserTag");
+    const replyText = document.getElementById("aiReplyText");
 
-    document.getElementById("chatQuickReplies").style.display = "none";
+    userTag.textContent = message;
+    userTag.style.display = "block";
+    input.value = "";
 
     const ruleReply = generateRuleBasedReply(message);
 
     if(ruleReply){
-        setTimeout(function(){
-            appendChatBubble(ruleReply, "ai");
-        }, 400);
+        replyText.innerHTML = ruleReply;
         return;
     }
 
     // 沒命中規則,交給瀏覽器內的開源模型回覆
-    const loadingBubbleId = "loading-" + Date.now();
-    appendChatBubble(
-        "<span id=\"" + loadingBubbleId + "\">🤖 思考中...(若是第一次使用需要先下載模型,請稍候)</span>",
-        "ai"
-    );
+    replyText.innerHTML = "🤖 思考中...(若是第一次使用需要先下載模型,請稍候)";
 
     try{
         const reply = await generateAiModelReply(message);
-        const bubbleEl = document.getElementById(loadingBubbleId);
-        if(bubbleEl) bubbleEl.parentElement.innerHTML = reply;
+        replyText.textContent = reply;
     }catch(e){
-        const bubbleEl = document.getElementById(loadingBubbleId);
-        const fallback = "目前無法載入 AI 模型(可能是網路問題),建議您使用「訊息分析」「電話查詢」或「網址檢查」功能。";
-        if(bubbleEl) bubbleEl.parentElement.innerHTML = fallback;
+        replyText.textContent = "目前無法載入 AI 模型(可能是網路問題),建議您使用「訊息分析」「電話查詢」或「網址檢查」功能。";
     }
 }
 
-function sendQuickReply(text){
-    document.getElementById("chatInput").value = text;
-    sendChatMessage();
+// 「+」按鈕:裝飾用附加選單面板,點擊切換顯示(沒有實際附加功能)
+let aiAttachShown = false;
+function toggleAiAttachPanel(){
+    aiAttachShown = !aiAttachShown;
+    document.getElementById("aiAttachPanel").style.display = aiAttachShown ? "block" : "none";
+    document.getElementById("aiPlusDot").style.display = aiAttachShown ? "block" : "none";
 }
+
+// 麥克風按鈕:裝飾用高亮效果(沒有接語音輸入功能)
+let aiMicShown = false;
+function toggleAiMicHighlight(){
+    aiMicShown = !aiMicShown;
+    document.getElementById("aiMicDot").style.display = aiMicShown ? "block" : "none";
+}
+
 
 /* ===== 掃描頁:相機 + QR Code 解析 ===== */
 let scanStream = null;
