@@ -595,6 +595,21 @@ document.addEventListener("DOMContentLoaded", function(){
             document.getElementById("urlError").style.display = "none";
             input.style.color = "#FFFFFF";
         });
+
+        // 防止手機鍵盤跳出時,瀏覽器自動把畫面往上捲動
+        function resetScroll(){
+            window.scrollTo(0, 0);
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+
+        input.addEventListener("focus", function(){
+            resetScroll();
+            setTimeout(resetScroll, 50);
+            setTimeout(resetScroll, 300);
+        });
+
+        input.addEventListener("blur", resetScroll);
     }
 });
 </script>
