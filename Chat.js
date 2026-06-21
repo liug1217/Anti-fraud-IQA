@@ -4,7 +4,7 @@
 //       把 AI 的回覆傳回前端。HF_API_TOKEN 存在 Vercel 環境變數裡,
 //       不會曝露在前端程式碼中。
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" });
     return;
