@@ -735,6 +735,198 @@ button{
     color: #8C8C8C;
 }
 
+/* ===== AI 對話頁 ===== */
+.chat-container{
+    position: absolute;
+    left: 0;
+    top: 110px;
+    right: 0;
+    bottom: 110px;
+    overflow-y: auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.chat-bubble-row{
+    display: flex;
+    margin-bottom: 14px;
+}
+
+.chat-bubble-row.user{ justify-content: flex-end; }
+.chat-bubble-row.ai{ justify-content: flex-start; }
+
+.chat-bubble{
+    max-width: 78%;
+    padding: 12px 16px;
+    border-radius: 20px;
+
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    word-break: break-word;
+}
+
+.chat-bubble-row.user .chat-bubble{
+    background: #2949CB;
+    border-bottom-right-radius: 6px;
+}
+
+.chat-bubble-row.ai .chat-bubble{
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(20px) saturate(160%) url(#liquidGlassRefract);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border-bottom-left-radius: 6px;
+}
+
+.chat-quick-replies{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 20px 14px;
+}
+
+.chat-quick-chip{
+    padding: 8px 14px;
+    border-radius: 100px;
+
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.chat-input-bar{
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    height: 56px;
+    box-sizing: border-box;
+    padding: 0 8px 0 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(20px) saturate(160%) url(#liquidGlassRefract);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    box-shadow:
+        0px 4px 4px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -1px 6px rgba(0,0,0,0.12);
+    border-radius: 100px;
+}
+
+.chat-input{
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    color: #FFFFFF;
+}
+
+.chat-input::placeholder{
+    color: #8C8C8C;
+}
+
+.chat-send-btn{
+    width: 40px;
+    height: 40px;
+    flex: none;
+    border-radius: 50%;
+    background: #2949CB;
+    border: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+
+/* ===== 掃描頁 ===== */
+.scan-video-wrap{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+}
+
+.scan-video-wrap video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.scan-frame{
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    width: 240px;
+    height: 240px;
+    transform: translate(-50%, -50%);
+
+    border: 3px solid rgba(255,255,255,0.8);
+    border-radius: 24px;
+    box-shadow: 0 0 0 9999px rgba(0,0,0,0.35);
+}
+
+.scan-hint{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(45% + 150px);
+    text-align: center;
+
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.scan-status{
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    line-height: 22px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: none;
+}
+
+.scan-status button{
+    margin-top: 16px;
+    padding: 10px 24px;
+    border-radius: 100px;
+    background: #2949CB;
+    border: none;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+}
+
 /* 降低透明度偏好設定:自動退回純色背景,不套用玻璃效果 */
 @media (prefers-reduced-transparency: reduce){
     .glass, .rect1, .rect7, .rect8, .message-textarea, .case-item, .profile-card, .profile-content-card{
@@ -745,6 +937,7 @@ button{
 }
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 </head>
 
 <body>
@@ -801,8 +994,8 @@ button{
     <div class="rect1">
         <div class="nav-frame">
             <div class="tab tab-home"><div class="tab-icon">🏠</div><div class="tab-text">首頁</div></div>
-            <div class="tab tab-ai"><div class="tab-icon">🤖</div><div class="tab-text">AI</div></div>
-            <div class="tab tab-scan"><div class="tab-icon">📷</div><div class="tab-text">掃描</div></div>
+            <div class="tab tab-ai" onclick="openAiPage()" style="cursor:pointer;"><div class="tab-icon">🤖</div><div class="tab-text">AI</div></div>
+            <div class="tab tab-scan" onclick="openScanPage()" style="cursor:pointer;"><div class="tab-icon">📷</div><div class="tab-text">掃描</div></div>
             <div class="tab tab-profile" onclick="openProfilePage()"><div class="tab-icon nav-avatar-icon"></div><div class="tab-text">我的</div></div>
         </div>
     </div>
@@ -951,6 +1144,57 @@ button{
 
 </div>
 
+<!-- ===== 第七個框架:AI 對話(與其他框架同色背景)===== -->
+<div class="page" id="aiPage">
+
+    <div class="page-header" onclick="closeAiPage()">
+        <div class="back-arrow"></div>
+        <div class="back-text">返回</div>
+    </div>
+
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-bubble-row ai">
+            <div class="chat-bubble">您好,我是反詐騙IQA智能小助手 🤖<br>有任何可疑的訊息、電話或網址,都可以直接告訴我,我會協助您判斷!</div>
+        </div>
+    </div>
+
+    <div class="chat-quick-replies" id="chatQuickReplies">
+        <div class="chat-quick-chip" onclick="sendQuickReply('這個網址安全嗎?')">這個網址安全嗎?</div>
+        <div class="chat-quick-chip" onclick="sendQuickReply('教我辨識詐騙簡訊')">教我辨識詐騙簡訊</div>
+        <div class="chat-quick-chip" onclick="sendQuickReply('這支電話是詐騙嗎?')">這支電話是詐騙嗎?</div>
+    </div>
+
+    <div class="chat-input-bar">
+        <input type="text" class="chat-input" id="chatInput" placeholder="輸入訊息..." autocomplete="off">
+        <button class="chat-send-btn" onclick="sendChatMessage()">➤</button>
+    </div>
+
+</div>
+
+<!-- ===== 第八個框架:掃描(與其他框架同色背景)===== -->
+<div class="page" id="scanPage">
+
+    <div class="page-header" onclick="closeScanPage()" style="z-index:10;">
+        <div class="back-arrow"></div>
+        <div class="back-text">返回</div>
+    </div>
+
+    <div class="scan-video-wrap">
+        <video id="scanVideo" autoplay playsinline muted></video>
+    </div>
+
+    <div class="scan-frame"></div>
+    <div class="scan-hint" id="scanHint">將 QR Code 對準框內進行掃描</div>
+
+    <div class="scan-status" id="scanStatus">
+        <div id="scanStatusText">需要相機權限才能掃描,請允許存取相機。</div>
+        <button onclick="startScan()">重新嘗試</button>
+    </div>
+
+    <canvas id="scanCanvas" style="display:none;"></canvas>
+
+</div>
+
 <!-- ===== 第三個框架:我的(與其他框架同色背景)===== -->
 <div class="page" id="profilePage">
 
@@ -975,8 +1219,8 @@ button{
     <div class="rect1">
         <div class="nav-frame">
             <div class="tab tab-home" onclick="closeProfilePage()" style="cursor:pointer;"><div class="tab-icon">🏠</div><div class="tab-text">首頁</div></div>
-            <div class="tab tab-ai"><div class="tab-icon">🤖</div><div class="tab-text">AI</div></div>
-            <div class="tab tab-scan"><div class="tab-icon">📷</div><div class="tab-text">掃描</div></div>
+            <div class="tab tab-ai" onclick="openAiPage()" style="cursor:pointer;"><div class="tab-icon">🤖</div><div class="tab-text">AI</div></div>
+            <div class="tab tab-scan" onclick="openScanPage()" style="cursor:pointer;"><div class="tab-icon">📷</div><div class="tab-text">掃描</div></div>
             <div class="tab tab-profile"><div class="tab-icon nav-avatar-icon"></div><div class="tab-text">我的</div></div>
         </div>
     </div>
@@ -1031,6 +1275,172 @@ function openCasesPage(){
 
 function closeCasesPage(){
     document.getElementById("casesPage").style.display = "none";
+}
+
+/* ===== AI 對話頁 ===== */
+function openAiPage(){
+    document.getElementById("aiPage").style.display = "block";
+}
+
+function closeAiPage(){
+    document.getElementById("aiPage").style.display = "none";
+}
+
+function appendChatBubble(text, sender){
+    const container = document.getElementById("chatContainer");
+    const row = document.createElement("div");
+    row.className = "chat-bubble-row " + sender;
+
+    const bubble = document.createElement("div");
+    bubble.className = "chat-bubble";
+    bubble.innerHTML = text;
+
+    row.appendChild(bubble);
+    container.appendChild(row);
+    container.scrollTop = container.scrollHeight;
+}
+
+// 規則式假回覆,之後可以換成真正的 AI API
+function generateAiReply(message){
+    const msg = message.toLowerCase();
+
+    if(message.includes("網址") || msg.includes("http") || msg.includes("連結")){
+        return "如果您收到可疑的網址,建議直接使用「網址檢查」功能確認真偽。要幫您打開嗎?<br><span style=\"text-decoration:underline; cursor:pointer;\" onclick=\"closeAiPage(); openUrlPage();\">前往網址檢查 →</span>";
+    }
+
+    if(message.includes("簡訊") || message.includes("訊息") || message.includes("LINE") || message.includes("對話")){
+        return "可疑簡訊常見的特徵包括:要求點擊連結、要求提供驗證碼、聲稱帳戶異常需要立即處理。您可以把內容貼到「訊息分析」幫您比對常見詐騙關鍵字。<br><span style=\"text-decoration:underline; cursor:pointer;\" onclick=\"closeAiPage(); openMessagePage();\">前往訊息分析 →</span>";
+    }
+
+    if(message.includes("電話") || message.includes("來電") || message.includes("打來")){
+        return "陌生來電要求提供個資、轉帳或安裝 App,都要提高警覺。可以用「電話查詢」確認這支號碼是否曾被檢舉。<br><span style=\"text-decoration:underline; cursor:pointer;\" onclick=\"closeAiPage(); openPhonePage();\">前往電話查詢 →</span>";
+    }
+
+    if(message.includes("謝謝") || message.includes("感謝")){
+        return "不客氣!保護自己最好的方式就是多一分懷疑、多一次確認 😊";
+    }
+
+    if(message.includes("你好") || message.includes("哈囉") || message.includes("嗨")){
+        return "您好!我是反詐騙IQA智能小助手,有任何可疑的訊息、來電或網址都可以告訴我喔!";
+    }
+
+    return "目前我還在學習中,建議您可以使用「訊息分析」「電話查詢」或「網址檢查」功能,我會持續為您比對最新的詐騙資訊。";
+}
+
+function sendChatMessage(){
+    const input = document.getElementById("chatInput");
+    const message = input.value.trim();
+    if(!message) return;
+
+    appendChatBubble(message, "user");
+    input.value = "";
+
+    document.getElementById("chatQuickReplies").style.display = "none";
+
+    setTimeout(function(){
+        appendChatBubble(generateAiReply(message), "ai");
+    }, 400);
+}
+
+function sendQuickReply(text){
+    document.getElementById("chatInput").value = text;
+    sendChatMessage();
+}
+
+/* ===== 掃描頁:相機 + QR Code 解析 ===== */
+let scanStream = null;
+let scanAnimationFrame = null;
+
+function openScanPage(){
+    document.getElementById("scanPage").style.display = "block";
+    startScan();
+}
+
+function closeScanPage(){
+    stopScan();
+    document.getElementById("scanPage").style.display = "none";
+}
+
+function stopScan(){
+    if(scanAnimationFrame){
+        cancelAnimationFrame(scanAnimationFrame);
+        scanAnimationFrame = null;
+    }
+    if(scanStream){
+        scanStream.getTracks().forEach(function(track){ track.stop(); });
+        scanStream = null;
+    }
+}
+
+function showScanStatus(text){
+    document.getElementById("scanStatusText").textContent = text;
+    document.getElementById("scanStatus").style.display = "block";
+    document.getElementById("scanHint").style.display = "none";
+}
+
+function hideScanStatus(){
+    document.getElementById("scanStatus").style.display = "none";
+    document.getElementById("scanHint").style.display = "block";
+}
+
+async function startScan(){
+    stopScan();
+
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+        showScanStatus("此裝置或瀏覽器不支援相機掃描功能");
+        return;
+    }
+
+    try{
+        scanStream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: "environment" }
+        });
+
+        const video = document.getElementById("scanVideo");
+        video.srcObject = scanStream;
+        await video.play();
+
+        hideScanStatus();
+        scanLoop();
+    }catch(e){
+        showScanStatus("無法取得相機權限,請至瀏覽器設定允許存取相機");
+    }
+}
+
+function scanLoop(){
+    const video = document.getElementById("scanVideo");
+    const canvas = document.getElementById("scanCanvas");
+
+    if(video.readyState === video.HAVE_ENOUGH_DATA && typeof jsQR === "function"){
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+        if(code && code.data){
+            handleScanResult(code.data);
+            return;
+        }
+    }
+
+    scanAnimationFrame = requestAnimationFrame(scanLoop);
+}
+
+function handleScanResult(text){
+    stopScan();
+
+    // 偵測到的內容看起來像網址 -> 直接導向網址檢查並帶入內容
+    if(/^https?:\/\//i.test(text) || /^[\w.-]+\.[a-zA-Z]{2,}/.test(text)){
+        document.getElementById("scanPage").style.display = "none";
+        document.getElementById("urlInput").value = text;
+        openUrlPage();
+        setTimeout(function(){ checkUrl(); }, 200);
+    }else{
+        showScanStatus("掃描到內容:" + text);
+    }
 }
 
 function closeUrlPage(){
@@ -1383,6 +1793,17 @@ document.addEventListener("DOMContentLoaded", function(){
             phoneInput.style.color = "#FFFFFF";
         });
         attachFocusScrollFix(phoneInput);
+    }
+
+    const chatInput = document.getElementById("chatInput");
+    if(chatInput){
+        chatInput.addEventListener("keydown", function(e){
+            if(e.key === "Enter"){
+                e.preventDefault();
+                sendChatMessage();
+            }
+        });
+        attachFocusScrollFix(chatInput);
     }
 
     // 頭像上傳:選擇圖片後讀取並顯示在頭像圓框裡
