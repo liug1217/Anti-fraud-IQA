@@ -514,7 +514,7 @@ html, body{
         <input class="url-input-label" id="urlInput" type="url" placeholder="輸入網址" inputmode="url" autocomplete="off" autocapitalize="off">
 
         <!-- Rectangle 9 -->
-        <button class="rect9" onclick="checkUrl()">
+        <button class="rect9" id="checkBtn" onclick="checkUrl()">
             <span class="url-confirm-text">確認</span>
         </button>
 
@@ -560,10 +560,31 @@ function isRealUrl(value){
     }
 }
 
-function checkUrl(){
+function getHostname(value){
+    const candidate = /^https?:\/\//i.test(value) ? value : "https://" + value;
+    try{
+        return new URL(candidate).hostname;
+    }catch(e){
+        return null;
+    }
+}
+
+// 用 Google 公開 DNS API 查詢網域是否真的有註冊紀錄(免費、不需要 API key)
+async function domainExists(hostname){
+    const response = await fetch(
+        "https://dns.google/resolve?name=" + encodeURIComponent(hostname) + "&type=A",
+        { method: "GET" }
+    );
+    const data = await response.json();
+    // Status 0 代表查詢成功;Answer 陣列有資料代表這個網域真的有 DNS 紀錄
+    return data && data.Status === 0 && Array.isArray(data.Answer) && data.Answer.length > 0;
+}
+
+async function checkUrl(){
     const input = document.getElementById("urlInput");
     const errorEl = document.getElementById("urlError");
     const resultEl = document.getElementById("urlResult");
+    const btn = document.getElementById("checkBtn");
     const value = input.value.trim();
 
     if(!value){
@@ -580,10 +601,34 @@ function checkUrl(){
         return;
     }
 
-    // 通過格式驗證後,先用假資料模擬檢查結果(之後可換成真實檢查邏輯)
+    const hostname = getHostname(value);
+
+    // 查詢中:暫時鎖住按鈕,避免重複點擊
     errorEl.style.display = "none";
-    resultEl.style.display = "block";
-    input.style.color = "#FFFFFF";
+    resultEl.style.display = "none";
+    btn.style.opacity = "0.6";
+    btn.disabled = true;
+
+    try{
+        const exists = await domainExists(hostname);
+
+        if(!exists){
+            errorEl.textContent = "查無此網域紀錄,網址可能不存在";
+            errorEl.style.display = "block";
+            resultEl.style.display = "none";
+        }else{
+            // 網域確實存在後,先用假資料模擬安全性檢查結果(之後可換成真實檢查邏輯)
+            resultEl.style.display = "block";
+        }
+    }catch(e){
+        errorEl.textContent = "查詢失敗,請檢查網路連線後再試一次";
+        errorEl.style.display = "block";
+        resultEl.style.display = "none";
+    }finally{
+        btn.style.opacity = "1";
+        btn.disabled = false;
+        input.style.color = "#FFFFFF";
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -614,4 +659,3 @@ document.addEventListener("DOMContentLoaded", function(){
 
 </body>
 </html>
-
