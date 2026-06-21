@@ -124,17 +124,23 @@ button{
         inset 0 -1px 6px rgba(0,0,0,0.12);
 }
 
-/* Frame 1:導覽列裡的圖示/文字群組,精確絕對定位(left:39px, top:31px 相對於 Rectangle 1) */
+/* Frame 1:導覽列裡的圖示/文字群組,永遠水平置中於 Rectangle 1 */
+/* Frame 1:導覽列裡的圖示/文字群組,左右永遠留空間,內部間距用 flex 自動調整 */
 .nav-frame{
     position: absolute;
-    left: 39px;
+    left: 40px;
+    right: 40px;
     top: 31px;
-    width: 320px;
     height: 45.5px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
 }
 
 .tab{
-    position: absolute;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -160,17 +166,8 @@ button{
     text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
 }
 
-/* Group 1:首頁 */
-.tab-home{ left: 0px; top: 0px; width: 30px; }
-
-/* Group 2:AI */
-.tab-ai{ left: 96px; top: 0px; width: 23px; }
-
-/* Group 3:掃描 */
-.tab-scan{ left: 191px; top: 0px; width: 30px; }
-
 /* Group 4:我的(含頭像圓形圖示) */
-.tab-profile{ left: 285px; top: 2.5px; width: 30px; cursor: pointer; }
+.tab-profile{ cursor: pointer; }
 .tab-profile .tab-icon{
     width: 20px;
     height: 20px;
