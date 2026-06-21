@@ -49,6 +49,7 @@ html, body{
     position: absolute;
     left: 20px;
     top: 60px;
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 30px;
     font-weight: 1000;
     color: #fff;
@@ -59,6 +60,7 @@ html, body{
     position: absolute;
     left: 20px;
     top: 106px;
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 15px;
     color: #8C8C8C;
 }
@@ -113,7 +115,7 @@ html, body{
 }
 
 .tab-icon{ font-size: 18px; }
-.tab-text{ font-size: 12px; margin-top: 4px; }
+.tab-text{ font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 12px; margin-top: 4px; }
 
 /* ===== Page(第二個框架,沿用首頁同色背景)===== */
 .page{
@@ -137,6 +139,7 @@ html, body{
     left: 20px;
     top: 60px;
 
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 18px;
     font-weight: 700;
     color: #fff;
@@ -149,6 +152,7 @@ html, body{
     position: absolute;
     left: 20px;
     top: 106px;
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 15px;
     color: #8C8C8C;
 }
@@ -163,6 +167,9 @@ html, body{
     top: 278px;
 
     background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 40px;
 }
@@ -175,7 +182,7 @@ html, body{
     left: 20px;
     top: 20px;
 
-    font-family: 'SF Pro';
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-style: normal;
     font-weight: 1000;
     font-size: 50px;
@@ -192,7 +199,7 @@ html, body{
     left: 90px;
     top: 27px;
 
-    font-family: 'SF Pro';
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 15px;
@@ -209,7 +216,7 @@ html, body{
     left: 90px;
     top: 50px;
 
-    font-family: 'SF Pro';
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-style: normal;
     font-weight: 510;
     font-size: 10px;
@@ -226,6 +233,9 @@ html, body{
     height: 50px;
 
     background: rgba(217, 217, 217, 0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 25px;
 }
@@ -238,9 +248,10 @@ html, body{
     top: 122px;
     height: 50px;
     box-sizing: border-box;
-    padding: 0 90px 0 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 
-    font-family: 'SF Pro';
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -270,19 +281,17 @@ html, body{
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 18px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     cursor: pointer;
     border: none;
 }
 
 /* 確認 */
 .url-confirm-text{
-    position: absolute;
-    width: 30px;
-    height: 18px;
-    right: 50px;
-    top: 138px;
-
-    font-family: 'SF Pro';
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -301,7 +310,7 @@ html, body{
     left: 20px;
     top: 192px;
 
-    font-family: 'SF Pro';
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 30px;
@@ -317,7 +326,7 @@ html, body{
     left: 70px;
     top: 199px;
 
-    font-family: 'SF Pro';
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -330,27 +339,29 @@ html, body{
     display: none;
 }
 
-/* 格式錯誤提示 */
+/* 格式錯誤提示:放在輸入框下方,靠左 20px */
 .url-error{
     position: absolute;
-    left: 70px;
-    top: 199px;
-    width: 290px;
+    left: 20px;
+    top: 178px;
+    width: calc(100% - 40px);
 
-    font-family: 'SF Pro';
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
+    font-size: 13px;
+    line-height: 1.3;
     color: #FF6B6B;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
     display: none;
+    white-space: normal;
 }
 
 /* ===== Card text ===== */
 .icon{
     position: absolute;
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     color: #fff;
     font-weight: 1000;
     text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
@@ -358,12 +369,14 @@ html, body{
 
 .text-main{
     position: absolute;
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     color: #fff;
     font-weight: 700;
 }
 
 .text-sub{
     position: absolute;
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     color: #8C8C8C;
 }
 
@@ -437,8 +450,9 @@ html, body{
         <input class="url-input-label" id="urlInput" type="url" placeholder="輸入網址" inputmode="url" autocomplete="off" autocapitalize="off">
 
         <!-- Rectangle 9 -->
-        <button class="rect9" onclick="checkUrl()"></button>
-        <div class="url-confirm-text">確認</div>
+        <button class="rect9" onclick="checkUrl()">
+            <span class="url-confirm-text">確認</span>
+        </button>
 
         <!-- 格式錯誤提示 -->
         <div class="url-error" id="urlError"></div>
@@ -461,7 +475,9 @@ function closeUrlPage(){
     document.getElementById("urlPage").style.display = "none";
     document.getElementById("urlResult").style.display = "none";
     document.getElementById("urlError").style.display = "none";
-    document.getElementById("urlInput").value = "";
+    const input = document.getElementById("urlInput");
+    input.value = "";
+    input.style.color = "#FFFFFF";
 }
 
 // 驗證是否為真實、格式正確的網址
@@ -503,7 +519,18 @@ function checkUrl(){
     // 通過格式驗證後,先用假資料模擬檢查結果(之後可換成真實檢查邏輯)
     errorEl.style.display = "none";
     resultEl.style.display = "block";
+    input.style.color = "#FFFFFF";
 }
+
+document.addEventListener("DOMContentLoaded", function(){
+    const input = document.getElementById("urlInput");
+    if(input){
+        input.addEventListener("input", function(){
+            document.getElementById("urlError").style.display = "none";
+            input.style.color = "#FFFFFF";
+        });
+    }
+});
 </script>
 
 </body>
